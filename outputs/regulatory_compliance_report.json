@@ -1,5 +1,5 @@
 {
-  "analysis_timestamp": "2025-06-19T13:58:10.473064",
+  "analysis_timestamp": "2025-06-19T14:17:21.859461",
   "system_info": {
     "name": "Adelaide Solar Inverter Network",
     "location": "Adelaide, South Australia",
@@ -44,7 +44,7 @@
         "requirement_id": "AEMO_VPP_001",
         "status": "COMPLIANT",
         "compliance_score": 100.0,
-        "assessment_date": "2025-06-19T13:58:10.473017",
+        "assessment_date": "2025-06-19T14:17:21.859413",
         "evidence": [
           "API endpoint components found",
           "AEMO VPP API endpoint identified",
@@ -59,7 +59,7 @@
         "requirement_id": "AEMO_VPP_002",
         "status": "COMPLIANT",
         "compliance_score": 100.0,
-        "assessment_date": "2025-06-19T13:58:10.473029",
+        "assessment_date": "2025-06-19T14:17:21.859426",
         "evidence": [
           "Monitoring system components found",
           "External data transmission capabilities found",
@@ -73,7 +73,7 @@
         "requirement_id": "AEMO_VPP_003",
         "status": "PARTIALLY_COMPLIANT",
         "compliance_score": 75.0,
-        "assessment_date": "2025-06-19T13:58:10.473038",
+        "assessment_date": "2025-06-19T14:17:21.859435",
         "evidence": [
           "Encryption implemented on 4 components",
           "Authentication implemented on 4 components",
@@ -95,7 +95,7 @@
         "requirement_id": "AEMO_VPP_004",
         "status": "PARTIALLY_COMPLIANT",
         "compliance_score": 70.0,
-        "assessment_date": "2025-06-19T13:58:10.473046",
+        "assessment_date": "2025-06-19T14:17:21.859442",
         "evidence": [
           "Emergency control endpoints available",
           "Real-time communication capabilities found"
@@ -114,7 +114,7 @@
         "requirement_id": "AS4777_001",
         "status": "PARTIALLY_COMPLIANT",
         "compliance_score": 50.0,
-        "assessment_date": "2025-06-19T13:58:10.473049",
+        "assessment_date": "2025-06-19T14:17:21.859446",
         "evidence": [
           "System configuration reviewed",
           "Found 2 solar inverter(s)"
@@ -131,7 +131,7 @@
         "requirement_id": "AS4777_002",
         "status": "PARTIALLY_COMPLIANT",
         "compliance_score": 50.0,
-        "assessment_date": "2025-06-19T13:58:10.473051",
+        "assessment_date": "2025-06-19T14:17:21.859447",
         "evidence": [
           "System configuration reviewed",
           "Found 2 solar inverter(s)"
