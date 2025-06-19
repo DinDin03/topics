@@ -1,0 +1,103 @@
+# Core Python packages for data analysis and manipulation
+pandas>=2.0.0
+numpy>=1.24.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+plotly>=5.14.0
+
+# Scientific computing and simulation
+scipy>=1.10.0
+scikit-learn>=1.3.0
+
+# Web requests and API interactions
+requests>=2.31.0
+urllib3>=2.0.0
+
+# JSON handling and data serialization
+jsonschema>=4.17.0
+pyyaml>=6.0
+
+# Network and protocol analysis
+scapy>=2.5.0
+pymodbus>=3.4.0
+paho-mqtt>=1.6.0
+
+# Cryptographic libraries for security analysis
+cryptography>=41.0.0
+pycryptodome>=3.18.0
+
+# Time series analysis
+pytz>=2023.3
+python-dateutil>=2.8.0
+
+# Solar energy and power system analysis
+pvlib>=0.10.0
+# Note: For PVWatts API integration
+
+# Threat modeling and security assessment
+# Custom implementations will be built for STRIDE and DREAD
+
+# Report generation and documentation
+jinja2>=3.1.0
+reportlab>=4.0.0
+weasyprint>=59.0
+
+# Testing framework
+pytest>=7.4.0
+pytest-cov>=4.1.0
+pytest-mock>=3.11.0
+
+# Development tools
+black>=23.0.0
+flake8>=6.0.0
+mypy>=1.4.0
+
+# Logging and monitoring
+loguru>=0.7.0
+
+# Configuration management
+python-dotenv>=1.0.0
+configparser>=6.0.0
+
+# Data validation
+marshmallow>=3.20.0
+cerberus>=1.3.0
+
+# Database connectivity (if needed for larger datasets)
+sqlalchemy>=2.0.0
+sqlite3
+
+# Jupyter notebook support for analysis
+jupyter>=1.0.0
+ipykernel>=6.24.0
+
+# HTML parsing for web scraping vulnerability databases
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+
+# Progress bars for long-running operations
+tqdm>=4.65.0
+
+# Memory profiling for performance analysis
+memory-profiler>=0.61.0
+
+# Command line interface
+click>=8.1.0
+argparse
+
+# File handling
+openpyxl>=3.1.0  # Excel file support
+pathlib2>=2.3.0
+
+# Network security scanning (for educational purposes only)
+python-nmap>=0.7.1
+
+# Statistical analysis
+statsmodels>=0.14.0
+
+# Visualization enhancements
+bokeh>=3.2.0
+
+# API documentation generation
+sphinx>=7.1.0
+sphinx-rtd-theme>=1.3.0

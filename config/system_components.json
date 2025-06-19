@@ -1,0 +1,643 @@
+{
+  "system_name": "Adelaide Solar Inverter Network",
+  "system_description": "Distributed solar energy system with remote monitoring and control capabilities as mandated by South Australian regulations",
+  "location": "Adelaide, South Australia",
+  "deployment_date": "2024-01-15",
+  "compliance_requirements": {
+    "aemo_vpp": {
+      "enabled": true,
+      "description": "AEMO Virtual Power Plant demonstration compliance",
+      "api_access_required": true,
+      "remote_control_mandatory": true
+    },
+    "as4777": {
+      "enabled": true,
+      "description": "AS4777 Grid Connection of Energy Systems via Inverters",
+      "voltage_response_required": true,
+      "frequency_response_required": true
+    },
+    "iec61850": {
+      "enabled": false,
+      "description": "IEC 61850 Communication Protocols for Electric Power Systems"
+    }
+  },
+  "network_topology": {
+    "internet_facing": true,
+    "firewall_enabled": false,
+    "network_segmentation": false,
+    "vpn_access": false,
+    "intrusion_detection": false,
+    "network_monitoring": false
+  },
+  "components": [
+    {
+      "id": "inverter_001",
+      "name": "Primary Solar Inverter SG5KTL",
+      "type": "solar_inverter",
+      "manufacturer": "sungrow",
+      "model": "SG5KTL",
+      "firmware_version": "1.0.3",
+      "capacity_kw": 5.0,
+      "location": "Residential Rooftop - North Array",
+      "installation_date": "2024-01-15",
+      "description": "Primary solar inverter converting DC power from north-facing solar array to AC power",
+      "protocols": ["modbus", "mqtt", "https"],
+      "network_interfaces": ["ethernet", "wifi"],
+      "api_endpoints": [
+        "/api/v1/status",
+        "/api/v1/control",
+        "/api/v1/telemetry",
+        "/api/v1/configuration"
+      ],
+      "processes_data": [
+        "power_generation_data",
+        "voltage_measurements", 
+        "current_measurements",
+        "control_commands",
+        "status_information"
+      ],
+      "stores_data": [
+        "configuration_parameters",
+        "operational_logs",
+        "historical_performance",
+        "alarm_history"
+      ],
+      "security_controls": [
+        "basic_authentication",
+        "https_enabled"
+      ],
+      "external_dependencies": [
+        "aemo_vpp_api",
+        "monitoring_platform",
+        "manufacturer_cloud"
+      ],
+      "internet_facing": false,
+      "default_credentials": {
+        "username": "admin",
+        "password": "admin",
+        "changed": false
+      },
+      "vulnerability_notes": [
+        "Default credentials not changed",
+        "HTTP interface available alongside HTTPS",
+        "Modbus interface unencrypted"
+      ]
+    },
+    {
+      "id": "inverter_002", 
+      "name": "Secondary Solar Inverter SG3KTL",
+      "type": "solar_inverter",
+      "manufacturer": "sungrow",
+      "model": "SG3KTL",
+      "firmware_version": "1.0.1",
+      "capacity_kw": 3.0,
+      "location": "Residential Rooftop - South Array",
+      "installation_date": "2024-02-01",
+      "description": "Secondary solar inverter for south-facing solar array",
+      "protocols": ["modbus", "mqtt"],
+      "network_interfaces": ["ethernet"],
+      "api_endpoints": [
+        "/api/v1/status",
+        "/api/v1/telemetry"
+      ],
+      "processes_data": [
+        "power_generation_data",
+        "voltage_measurements",
+        "status_information"
+      ],
+      "stores_data": [
+        "configuration_parameters",
+        "operational_logs"
+      ],
+      "security_controls": [],
+      "external_dependencies": [
+        "monitoring_platform"
+      ],
+      "internet_facing": false,
+      "default_credentials": {
+        "username": "admin",
+        "password": "admin", 
+        "changed": false
+      },
+      "vulnerability_notes": [
+        "Outdated firmware version",
+        "No HTTPS support",
+        "No authentication on Modbus interface",
+        "Unencrypted MQTT communications"
+      ]
+    },
+    {
+      "id": "gateway_001",
+      "name": "IoT Communication Gateway",
+      "type": "gateway",
+      "manufacturer": "generic",
+      "model": "IoT-GW-001",
+      "firmware_version": "2.0.0",
+      "location": "Electrical Panel - Main Distribution",
+      "installation_date": "2024-01-15",
+      "description": "Central communication gateway aggregating data from multiple inverters and providing cloud connectivity",
+      "protocols": ["mqtt", "https", "modbus", "ethernet"],
+      "network_interfaces": ["ethernet", "wifi", "cellular"],
+      "api_endpoints": [
+        "/api/v1/devices",
+        "/api/v1/aggregate", 
+        "/api/v1/forward",
+        "/api/v1/config"
+      ],
+      "processes_data": [
+        "aggregated_telemetry",
+        "control_commands",
+        "device_status",
+        "network_configuration"
+      ],
+      "stores_data": [
+        "device_registry",
+        "communication_logs",
+        "configuration_data",
+        "cached_telemetry"
+      ],
+      "security_controls": [
+        "encryption",
+        "authentication",
+        "access_logging"
+      ],
+      "external_dependencies": [
+        "aemo_vpp_api",
+        "manufacturer_cloud",
+        "cellular_network"
+      ],
+      "internet_facing": true,
+      "default_credentials": {
+        "username": "admin",
+        "password": "gateway123",
+        "changed": true
+      },
+      "features": [
+        "data_aggregation",
+        "remote_control",
+        "protocol_translation",
+        "cloud_connectivity"
+      ]
+    },
+    {
+      "id": "api_001",
+      "name": "AEMO VPP API Endpoint",
+      "type": "api",
+      "manufacturer": "aemo",
+      "model": "VPP-API-v2",
+      "version": "2.1.0",
+      "location": "Cloud Infrastructure",
+      "description": "AEMO Virtual Power Plant API endpoint for remote inverter control and monitoring as mandated by SA regulations",
+      "protocols": ["https", "oauth2"],
+      "network_interfaces": ["internet"],
+      "api_endpoints": [
+        "/vpp/v2/devices/register",
+        "/vpp/v2/devices/control", 
+        "/vpp/v2/devices/status",
+        "/vpp/v2/market/dispatch"
+      ],
+      "processes_data": [
+        "device_registration",
+        "control_commands",
+        "market_dispatch_signals",
+        "compliance_reporting"
+      ],
+      "stores_data": [
+        "device_database",
+        "command_history", 
+        "compliance_records",
+        "market_data"
+      ],
+      "security_controls": [
+        "oauth2_authentication",
+        "https_encryption",
+        "rate_limiting",
+        "api_key_management",
+        "audit_logging"
+      ],
+      "external_dependencies": [
+        "nem_market_systems",
+        "device_manufacturer_apis"
+      ],
+      "internet_facing": true,
+      "authentication": {
+        "type": "oauth2",
+        "token_expiry": "3600",
+        "refresh_token_required": true
+      }
+    },
+    {
+      "id": "monitoring_001",
+      "name": "Solar Monitoring Platform",
+      "type": "monitoring_system",
+      "manufacturer": "solar_analytics",
+      "model": "SA-Monitor-Pro",
+      "version": "3.2.1",
+      "location": "Cloud Infrastructure",
+      "description": "Third-party monitoring platform for solar system performance tracking and alerting",
+      "protocols": ["https", "mqtt"],
+      "network_interfaces": ["internet"],
+      "api_endpoints": [
+        "/monitor/v1/devices",
+        "/monitor/v1/data/ingest",
+        "/monitor/v1/alerts",
+        "/monitor/v1/reports"
+      ],
+      "processes_data": [
+        "performance_metrics",
+        "alert_generation",
+        "trend_analysis", 
+        "reporting_data"
+      ],
+      "stores_data": [
+        "historical_performance",
+        "alert_logs",
+        "user_preferences",
+        "system_configuration"
+      ],
+      "security_controls": [
+        "https_encryption",
+        "user_authentication",
+        "role_based_access",
+        "session_management"
+      ],
+      "external_dependencies": [
+        "weather_services",
+        "email_notifications",
+        "sms_gateway"
+      ],
+      "internet_facing": true,
+      "data_retention": {
+        "performance_data": "5_years",
+        "alert_logs": "2_years",
+        "user_activity": "1_year"
+      }
+    },
+    {
+      "id": "web_interface_001",
+      "name": "Inverter Management Web Interface",
+      "type": "web_interface",
+      "manufacturer": "sungrow",
+      "model": "iSolarCloud",
+      "version": "4.1.2",
+      "location": "Inverter Local Network",
+      "description": "Local web-based management interface for inverter configuration and monitoring",
+      "protocols": ["http", "https"],
+      "network_interfaces": ["ethernet"],
+      "api_endpoints": [
+        "/",
+        "/login",
+        "/dashboard",
+        "/settings",
+        "/logs",
+        "/firmware"
+      ],
+      "processes_data": [
+        "user_authentication",
+        "configuration_changes",
+        "real_time_monitoring",
+        "firmware_updates"
+      ],
+      "stores_data": [
+        "user_sessions",
+        "configuration_backup",
+        "access_logs"
+      ],
+      "security_controls": [
+        "session_management"
+      ],
+      "external_dependencies": [],
+      "internet_facing": false,
+      "default_credentials": {
+        "username": "admin",
+        "password": "admin",
+        "changed": false
+      },
+      "vulnerability_notes": [
+        "HTTP interface available (not just HTTPS)",
+        "Default credentials not changed",
+        "No multi-factor authentication",
+        "Session management vulnerabilities"
+      ]
+    },
+    {
+      "id": "database_001",
+      "name": "Local Configuration Database",
+      "type": "database",
+      "manufacturer": "sqlite",
+      "model": "SQLite3",
+      "version": "3.36.0",
+      "location": "Gateway Local Storage",
+      "description": "Local database storing device configurations, logs, and cached data",
+      "protocols": ["sqlite"],
+      "network_interfaces": ["local"],
+      "processes_data": [
+        "device_configurations",
+        "operational_logs",
+        "performance_history",
+        "user_settings"
+      ],
+      "stores_data": [
+        "inverter_configs",
+        "communication_logs",
+        "performance_metrics",
+        "alert_history",
+        "user_accounts"
+      ],
+      "security_controls": [
+        "file_permissions"
+      ],
+      "external_dependencies": [],
+      "internet_facing": false,
+      "encryption": {
+        "at_rest": false,
+        "backup": false
+      },
+      "vulnerability_notes": [
+        "No encryption at rest",
+        "Weak file permissions",
+        "No database-level authentication",
+        "Backup files unencrypted"
+      ]
+    }
+  ],
+  "data_flows": [
+    {
+      "id": "flow_001",
+      "name": "Inverter to Gateway Telemetry",
+      "source_component": "inverter_001",
+      "destination_component": "gateway_001",
+      "data_description": "Real-time power generation and status data via Modbus TCP",
+      "protocol": "modbus_tcp",
+      "port": 502,
+      "frequency": "30_seconds",
+      "data_types": [
+        "power_output",
+        "voltage_measurements",
+        "current_measurements",
+        "temperature_readings",
+        "status_flags"
+      ],
+      "encryption_in_transit": false,
+      "authentication_required": false,
+      "crosses_trust_boundary": false,
+      "trust_boundary_source": "DEVICE_NETWORK",
+      "trust_boundary_destination": "DEVICE_NETWORK",
+      "data_sensitivity": "medium",
+      "vulnerability_notes": [
+        "Unencrypted Modbus communication",
+        "No authentication on Modbus interface",
+        "Susceptible to man-in-the-middle attacks"
+      ]
+    },
+    {
+      "id": "flow_002",
+      "name": "Gateway to AEMO VPP API",
+      "source_component": "gateway_001",
+      "destination_component": "api_001",
+      "data_description": "Device status and control acknowledgments to AEMO VPP system",
+      "protocol": "https",
+      "port": 443,
+      "frequency": "5_minutes",
+      "data_types": [
+        "device_status",
+        "power_output_summary",
+        "availability_status",
+        "control_acknowledgments"
+      ],
+      "encryption_in_transit": true,
+      "authentication_required": true,
+      "authentication_method": "oauth2_bearer_token",
+      "crosses_trust_boundary": true,
+      "trust_boundary_source": "DEVICE_NETWORK",
+      "trust_boundary_destination": "INTERNET",
+      "data_sensitivity": "high",
+      "compliance_requirement": "aemo_vpp_mandatory"
+    },
+    {
+      "id": "flow_003",
+      "name": "AEMO Control Commands",
+      "source_component": "api_001",
+      "destination_component": "gateway_001",
+      "data_description": "Remote control commands from AEMO for grid stability management",
+      "protocol": "https",
+      "port": 443,
+      "frequency": "on_demand",
+      "data_types": [
+        "power_limit_commands",
+        "voltage_reference_settings",
+        "frequency_response_parameters",
+        "emergency_shutdown_commands"
+      ],
+      "encryption_in_transit": true,
+      "authentication_required": true,
+      "authentication_method": "api_key_and_oauth2",
+      "crosses_trust_boundary": true,
+      "trust_boundary_source": "INTERNET",
+      "trust_boundary_destination": "DEVICE_NETWORK",
+      "data_sensitivity": "critical",
+      "compliance_requirement": "aemo_vpp_mandatory",
+      "control_criticality": "high"
+    },
+    {
+      "id": "flow_004",
+      "name": "Gateway to Monitoring Platform",
+      "source_component": "gateway_001",
+      "destination_component": "monitoring_001",
+      "data_description": "Performance data for third-party monitoring and analytics",
+      "protocol": "mqtt_over_tls",
+      "port": 8883,
+      "frequency": "1_minute",
+      "data_types": [
+        "power_generation_data",
+        "efficiency_metrics",
+        "environmental_conditions",
+        "system_health_indicators"
+      ],
+      "encryption_in_transit": true,
+      "authentication_required": true,
+      "authentication_method": "tls_client_certificates",
+      "crosses_trust_boundary": true,
+      "trust_boundary_source": "DEVICE_NETWORK",
+      "trust_boundary_destination": "INTERNET",
+      "data_sensitivity": "medium"
+    },
+    {
+      "id": "flow_005",
+      "name": "User Web Interface Access",
+      "source_component": "external_user",
+      "destination_component": "web_interface_001",
+      "data_description": "User access to inverter management web interface",
+      "protocol": "http",
+      "port": 80,
+      "frequency": "on_demand",
+      "data_types": [
+        "authentication_credentials",
+        "configuration_changes",
+        "monitoring_data_requests",
+        "firmware_update_files"
+      ],
+      "encryption_in_transit": false,
+      "authentication_required": true,
+      "authentication_method": "basic_auth",
+      "crosses_trust_boundary": true,
+      "trust_boundary_source": "INTERNET",
+      "trust_boundary_destination": "DEVICE_NETWORK",
+      "data_sensitivity": "high",
+      "vulnerability_notes": [
+        "HTTP used instead of HTTPS",
+        "Basic authentication over unencrypted connection",
+        "Credentials transmitted in plaintext"
+      ]
+    },
+    {
+      "id": "flow_006",
+      "name": "Database Storage Operations",
+      "source_component": "gateway_001",
+      "destination_component": "database_001",
+      "data_description": "Local storage of configuration and operational data",
+      "protocol": "sqlite",
+      "port": "local_file",
+      "frequency": "continuous",
+      "data_types": [
+        "device_configurations",
+        "operational_logs",
+        "performance_history",
+        "user_credentials",
+        "api_keys"
+      ],
+      "encryption_in_transit": false,
+      "authentication_required": false,
+      "crosses_trust_boundary": false,
+      "trust_boundary_source": "DEVICE_NETWORK",
+      "trust_boundary_destination": "DEVICE_NETWORK",
+      "data_sensitivity": "high",
+      "vulnerability_notes": [
+        "No encryption for stored data",
+        "Sensitive credentials stored in plaintext",
+        "No database access controls"
+      ]
+    }
+  ],
+  "trust_boundaries": [
+    {
+      "name": "INTERNET",
+      "description": "Public internet - untrusted external network",
+      "security_level": "untrusted",
+      "components": ["api_001", "monitoring_001"]
+    },
+    {
+      "name": "DMZ",
+      "description": "Demilitarized zone - semi-trusted network segment",
+      "security_level": "semi_trusted",
+      "components": []
+    },
+    {
+      "name": "DEVICE_NETWORK", 
+      "description": "IoT device network - local solar inverter network",
+      "security_level": "trusted",
+      "components": [
+        "inverter_001",
+        "inverter_002", 
+        "gateway_001",
+        "web_interface_001",
+        "database_001"
+      ]
+    },
+    {
+      "name": "INTERNAL_NETWORK",
+      "description": "Internal corporate network",
+      "security_level": "trusted",
+      "components": []
+    },
+    {
+      "name": "MANAGEMENT_NETWORK",
+      "description": "Network management and monitoring zone",
+      "security_level": "highly_trusted",
+      "components": []
+    }
+  ],
+  "security_policies": {
+    "password_policy": {
+      "minimum_length": 8,
+      "require_special_characters": false,
+      "require_numbers": false,
+      "require_uppercase": false,
+      "password_expiry_days": 0,
+      "password_history": 0
+    },
+    "network_access": {
+      "firewall_enabled": false,
+      "intrusion_detection": false,
+      "network_segmentation": false,
+      "vpn_required": false
+    },
+    "data_protection": {
+      "encryption_at_rest": false,
+      "encryption_in_transit": "partial",
+      "data_backup": false,
+      "data_retention_policy": false
+    },
+    "access_control": {
+      "multi_factor_authentication": false,
+      "role_based_access": false,
+      "session_timeout": "none",
+      "audit_logging": "minimal"
+    }
+  },
+  "threat_landscape": {
+    "known_vulnerabilities": [
+      {
+        "cve_id": "CVE-2023-1001",
+        "affected_components": ["inverter_001", "inverter_002"],
+        "description": "Hardcoded MQTT credentials in Sungrow firmware",
+        "severity": "HIGH"
+      },
+      {
+        "cve_id": "CVE-2023-1002",
+        "affected_components": ["web_interface_001"],
+        "description": "Default admin credentials vulnerability",
+        "severity": "CRITICAL"
+      }
+    ],
+    "threat_actors": [
+      {
+        "type": "nation_state",
+        "capability": "advanced",
+        "motivation": "infrastructure_disruption",
+        "likelihood": "low"
+      },
+      {
+        "type": "cybercriminal",
+        "capability": "moderate",
+        "motivation": "financial_gain",
+        "likelihood": "medium"
+      },
+      {
+        "type": "hacktivist",
+        "capability": "basic",
+        "motivation": "environmental_protest",
+        "likelihood": "low"
+      },
+      {
+        "type": "insider",
+        "capability": "high",
+        "motivation": "various", 
+        "likelihood": "low"
+      }
+    ]
+  },
+  "regulatory_context": {
+    "south_australia_requirements": {
+      "mandatory_remote_access": true,
+      "aemo_vpp_participation": "required_for_new_installations",
+      "grid_support_functions": "mandatory",
+      "cybersecurity_standards": "recommended_not_mandatory"
+    },
+    "compliance_status": {
+      "technical_compliance": "partial",
+      "security_compliance": "non_compliant",
+      "reporting_compliance": "compliant"
+    }
+  }
+}
