@@ -1,24 +1,3 @@
-"""
-DREAD Risk Assessment Module
-
-This module implements the DREAD (Damage, Reproducibility, Exploitability, 
-Affected Users, Discoverability) risk assessment methodology for solar 
-inverter cybersecurity threats.
-
-DREAD is a risk assessment model that provides a quantitative approach 
-to evaluating security threats. This implementation demonstrates:
-- Quantitative risk assessment methodologies
-- Statistical analysis of security risks
-- Risk prioritization algorithms
-- Integration with threat modeling frameworks
-
-Key Components:
-- DreadAssessment: Main DREAD analysis engine
-- RiskCalculator: Risk scoring and calculation utilities
-- ThreatPrioritizer: Threat prioritization based on DREAD scores
-- RiskMetrics: Statistical analysis of risk distributions
-"""
-
 import json
 import logging
 import statistics
@@ -30,40 +9,29 @@ from enum import Enum
 import pandas as pd
 import numpy as np
 
-# Configure logging
 logger = logging.getLogger(__name__)
 
 class DreadComponent(Enum):
-    """DREAD assessment components."""
-    DAMAGE = "DAMAGE"                        # Potential damage if exploited
-    REPRODUCIBILITY = "REPRODUCIBILITY"      # How easy to reproduce
-    EXPLOITABILITY = "EXPLOITABILITY"        # How easy to exploit
-    AFFECTED_USERS = "AFFECTED_USERS"        # Number of users affected
-    DISCOVERABILITY = "DISCOVERABILITY"      # How easy to discover
+    DAMAGE = "DAMAGE"                      
+    REPRODUCIBILITY = "REPRODUCIBILITY"   
+    EXPLOITABILITY = "EXPLOITABILITY"    
+    AFFECTED_USERS = "AFFECTED_USERS"    
+    DISCOVERABILITY = "DISCOVERABILITY"     
 
 @dataclass
 class DreadScore:
-    """
-    Represents a DREAD score for a specific threat.
-    
-    Each component is scored on a scale of 1-10, where:
-    - 1 = Low risk/impact
-    - 10 = High risk/impact
-    """
     threat_id: str
-    damage: int              # 1-10: Impact if exploit succeeds
-    reproducibility: int     # 1-10: How reliably can attack be reproduced
-    exploitability: int      # 1-10: How easy is it to exploit
-    affected_users: int      # 1-10: How many users are affected
-    discoverability: int     # 1-10: How easy is it to discover vulnerability
+    damage: int            
+    reproducibility: int   
+    exploitability: int      
+    affected_users: int
+    discoverability: int     
     
-    # Calculated fields
     total_score: float = field(init=False)
     average_score: float = field(init=False)
     risk_level: str = field(init=False)
     
     def __post_init__(self):
-        """Calculate derived scores after initialization."""
         self.total_score = (
             self.damage + self.reproducibility + self.exploitability + 
             self.affected_users + self.discoverability
@@ -72,7 +40,6 @@ class DreadScore:
         self.risk_level = self._calculate_risk_level()
     
     def _calculate_risk_level(self) -> str:
-        """Calculate risk level based on average score."""
         if self.average_score >= 8:
             return "CRITICAL"
         elif self.average_score >= 6:
@@ -85,7 +52,6 @@ class DreadScore:
             return "MINIMAL"
     
     def to_dict(self) -> Dict[str, Any]:
-        """Convert DREAD score to dictionary."""
         return {
             "threat_id": self.threat_id,
             "damage": self.damage,
@@ -100,7 +66,6 @@ class DreadScore:
     
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> 'DreadScore':
-        """Create DREAD score from dictionary."""
         return cls(
             threat_id=data["threat_id"],
             damage=data["damage"],
@@ -111,28 +76,10 @@ class DreadScore:
         )
 
 class RiskCalculator:
-    """
-    Utility class for risk calculations and statistical analysis.
-    
-    This class demonstrates backend data analysis patterns and
-    statistical computing commonly used in security systems.
-    """
-    
     @staticmethod
     def calculate_weighted_dread_score(dread_score: DreadScore, 
                                      weights: Dict[str, float] = None) -> float:
-        """
-        Calculate weighted DREAD score with custom component weights.
-        
-        Args:
-            dread_score: DREAD score object
-            weights: Custom weights for each component (default: equal weights)
-            
-        Returns:
-            Weighted DREAD score
-        """
         if weights is None:
-            # Default equal weights
             weights = {
                 "damage": 0.2,
                 "reproducibility": 0.2,
@@ -153,24 +100,13 @@ class RiskCalculator:
     
     @staticmethod
     def calculate_risk_metrics(dread_scores: List[DreadScore]) -> Dict[str, Any]:
-        """
-        Calculate statistical metrics for a collection of DREAD scores.
-        
-        Args:
-            dread_scores: List of DREAD scores to analyze
-            
-        Returns:
-            Statistical metrics including mean, median, std dev, etc.
-        """
         if not dread_scores:
             return {"error": "No DREAD scores provided"}
         
-        # Extract score arrays for analysis
         total_scores = [score.total_score for score in dread_scores]
         average_scores = [score.average_score for score in dread_scores]
         damage_scores = [score.damage for score in dread_scores]
         
-        # Calculate statistics
         metrics = {
             "count": len(dread_scores),
             "total_score_stats": {
@@ -203,7 +139,6 @@ class RiskCalculator:
     
     @staticmethod
     def _analyze_dread_components(dread_scores: List[DreadScore]) -> Dict[str, Dict[str, float]]:
-        """Analyze individual DREAD components across all threats."""
         components = {
             "damage": [score.damage for score in dread_scores],
             "reproducibility": [score.reproducibility for score in dread_scores],
@@ -224,20 +159,7 @@ class RiskCalculator:
         return analysis
 
 class ThreatPrioritizer:
-    """
-    Prioritizes threats based on DREAD scores and other factors.
-    
-    This class demonstrates algorithmic approaches to risk management
-    and decision support systems commonly used in enterprise security.
-    """
-    
     def __init__(self, custom_weights: Dict[str, float] = None):
-        """
-        Initialize threat prioritizer with optional custom weights.
-        
-        Args:
-            custom_weights: Custom weights for DREAD components
-        """
         self.custom_weights = custom_weights or {
             "damage": 0.3,          # Higher weight for damage potential
             "reproducibility": 0.15,
@@ -248,17 +170,6 @@ class ThreatPrioritizer:
     
     def prioritize_threats(self, dread_scores: List[DreadScore], 
                           limit: int = None) -> List[Tuple[str, float, str]]:
-        """
-        Prioritize threats based on weighted DREAD scores.
-        
-        Args:
-            dread_scores: List of DREAD scores to prioritize
-            limit: Maximum number of threats to return (default: all)
-            
-        Returns:
-            List of tuples (threat_id, weighted_score, risk_level)
-        """
-        # Calculate weighted scores
         weighted_threats = []
         for dread_score in dread_scores:
             weighted_score = RiskCalculator.calculate_weighted_dread_score(
@@ -270,28 +181,14 @@ class ThreatPrioritizer:
                 dread_score.risk_level
             ))
         
-        # Sort by weighted score (highest first)
         weighted_threats.sort(key=lambda x: x[1], reverse=True)
         
-        # Apply limit if specified
         if limit:
             weighted_threats = weighted_threats[:limit]
         
         return weighted_threats
     
     def generate_priority_matrix(self, dread_scores: List[DreadScore]) -> Dict[str, List[str]]:
-        """
-        Generate a priority matrix categorizing threats by risk and exploitability.
-        
-        This creates a 2x2 matrix useful for executive reporting and
-        resource allocation decisions.
-        
-        Args:
-            dread_scores: List of DREAD scores to categorize
-            
-        Returns:
-            Dictionary with categorized threat IDs
-        """
         matrix = {
             "high_risk_high_exploitability": [],    # Immediate attention
             "high_risk_low_exploitability": [],     # Important but less urgent
@@ -300,15 +197,12 @@ class ThreatPrioritizer:
         }
         
         for dread_score in dread_scores:
-            # Determine risk level (based on damage and affected users)
             risk_score = (dread_score.damage + dread_score.affected_users) / 2
             high_risk = risk_score >= 6
             
-            # Determine exploitability (based on reproducibility and exploitability)
             exploit_score = (dread_score.reproducibility + dread_score.exploitability) / 2
             high_exploitability = exploit_score >= 6
             
-            # Categorize threat
             if high_risk and high_exploitability:
                 matrix["high_risk_high_exploitability"].append(dread_score.threat_id)
             elif high_risk and not high_exploitability:
@@ -321,20 +215,7 @@ class ThreatPrioritizer:
         return matrix
 
 class DreadAssessment:
-    """
-    Main DREAD assessment engine for solar inverter cybersecurity.
-    
-    This class orchestrates the complete DREAD analysis process,
-    demonstrating enterprise security risk management patterns.
-    """
-    
     def __init__(self, threats_data_path: str = None):
-        """
-        Initialize DREAD assessment engine.
-        
-        Args:
-            threats_data_path: Path to threat data (JSON format)
-        """
         self.threats_data_path = threats_data_path
         self.dread_scores: List[DreadScore] = []
         self.risk_calculator = RiskCalculator()
@@ -342,12 +223,6 @@ class DreadAssessment:
         self.assessment_rules = self._load_assessment_rules()
     
     def _load_assessment_rules(self) -> Dict[str, Any]:
-        """
-        Load DREAD assessment rules and scoring guidelines.
-        
-        These rules help standardize DREAD scoring across different
-        analysts and ensure consistent risk assessment.
-        """
         return {
             "damage_scoring": {
                 "1-2": "Minimal impact, no data loss, brief service interruption",
@@ -375,7 +250,7 @@ class DreadAssessment:
                 "3-4": "Small group of users or few devices", 
                 "5-6": "Department or moderate number of devices",
                 "7-8": "Organization-wide or large device network",
-                "9-10": "Multi-organization or entire grid infrastructure"
+                "9-10": "Multi-organisation or entire grid infrastructure"
             },
             "discoverability_scoring": {
                 "1-2": "Very difficult to find, requires insider knowledge",
@@ -388,19 +263,6 @@ class DreadAssessment:
     
     def assess_threat(self, threat_id: str, threat_description: str, 
                      threat_type: str = "", affected_component: str = "") -> DreadScore:
-        """
-        Perform DREAD assessment for a single threat.
-        
-        Args:
-            threat_id: Unique identifier for the threat
-            threat_description: Description of the threat
-            threat_type: Type/category of threat
-            affected_component: Component affected by threat
-            
-        Returns:
-            DREAD score for the threat
-        """
-        # Apply automated scoring rules based on threat characteristics
         damage_score = self._assess_damage(threat_description, threat_type, affected_component)
         reproducibility_score = self._assess_reproducibility(threat_description, threat_type)
         exploitability_score = self._assess_exploitability(threat_description, threat_type)
@@ -420,31 +282,25 @@ class DreadAssessment:
         return dread_score
     
     def _assess_damage(self, description: str, threat_type: str, component: str) -> int:
-        """Assess potential damage score based on threat characteristics."""
-        damage_score = 5  # Default moderate score
+        damage_score = 5 
         
-        # Keyword-based scoring
         description_lower = description.lower()
         
-        # High damage indicators
         if any(keyword in description_lower for keyword in [
             "complete system", "total control", "grid disruption", "power outage"
         ]):
             damage_score = min(10, damage_score + 4)
         
-        # Moderate damage indicators  
         elif any(keyword in description_lower for keyword in [
             "unauthorized control", "data manipulation", "service disruption"
         ]):
             damage_score = min(8, damage_score + 2)
         
-        # Component-specific adjustments
         if "inverter" in component.lower():
-            damage_score = min(10, damage_score + 1)  # Inverters are critical
+            damage_score = min(10, damage_score + 1)
         elif "api" in component.lower():
-            damage_score = min(9, damage_score + 2)   # APIs can affect multiple systems
+            damage_score = min(9, damage_score + 2) 
         
-        # Threat type adjustments
         if threat_type.upper() in ["DENIAL_OF_SERVICE", "TAMPERING"]:
             damage_score = min(10, damage_score + 1)
         
@@ -452,47 +308,40 @@ class DreadAssessment:
     
     def _assess_reproducibility(self, description: str, threat_type: str) -> int:
         """Assess reproducibility score based on threat characteristics."""
-        reproducibility_score = 5  # Default moderate score
+        reproducibility_score = 5
         
         description_lower = description.lower()
         
-        # High reproducibility indicators
         if any(keyword in description_lower for keyword in [
             "default credentials", "plaintext", "unencrypted", "automated"
         ]):
             reproducibility_score = min(10, reproducibility_score + 3)
         
-        # Low reproducibility indicators
         elif any(keyword in description_lower for keyword in [
             "race condition", "timing", "specific configuration"
         ]):
             reproducibility_score = max(1, reproducibility_score - 2)
         
-        # Protocol-specific adjustments
         if any(protocol in description_lower for protocol in ["modbus", "mqtt", "http"]):
             reproducibility_score = min(10, reproducibility_score + 1)
         
         return max(1, min(10, reproducibility_score))
     
     def _assess_exploitability(self, description: str, threat_type: str) -> int:
-        """Assess exploitability score based on threat characteristics."""
-        exploitability_score = 5  # Default moderate score
+        exploitability_score = 5
         
         description_lower = description.lower()
         
-        # High exploitability indicators
         if any(keyword in description_lower for keyword in [
             "no authentication", "default password", "public exploit", "simple attack"
         ]):
             exploitability_score = min(10, exploitability_score + 3)
         
-        # Medium exploitability indicators
         elif any(keyword in description_lower for keyword in [
             "weak authentication", "known vulnerability", "basic tools"
         ]):
             exploitability_score = min(8, exploitability_score + 1)
         
-        # Low exploitability indicators  
         elif any(keyword in description_lower for keyword in [
             "complex attack", "requires expertise", "advanced knowledge"
         ]):
@@ -502,38 +351,33 @@ class DreadAssessment:
     
     def _assess_affected_users(self, description: str, component: str) -> int:
         """Assess number of affected users/systems."""
-        affected_score = 5  # Default moderate score
+        affected_score = 5 
         
         description_lower = description.lower()
         component_lower = component.lower()
         
-        # High impact indicators
         if any(keyword in description_lower for keyword in [
             "grid-wide", "multiple systems", "cascading", "network-wide"
         ]):
             affected_score = min(10, affected_score + 4)
         
-        # Component-specific adjustments
         if "gateway" in component_lower or "api" in component_lower:
-            affected_score = min(10, affected_score + 2)  # Gateways/APIs affect multiple devices
+            affected_score = min(10, affected_score + 2) 
         elif "inverter" in component_lower:
-            affected_score = min(7, affected_score + 1)   # Individual inverter has moderate impact
+            affected_score = min(7, affected_score + 1)
         
         return max(1, min(10, affected_score))
     
     def _assess_discoverability(self, description: str, threat_type: str) -> int:
-        """Assess how easy the vulnerability is to discover."""
-        discoverability_score = 5  # Default moderate score
+        discoverability_score = 5  
         
         description_lower = description.lower()
         
-        # High discoverability indicators
         if any(keyword in description_lower for keyword in [
             "public interface", "web interface", "default settings", "obvious"
         ]):
             discoverability_score = min(10, discoverability_score + 3)
         
-        # Low discoverability indicators
         elif any(keyword in description_lower for keyword in [
             "internal", "hidden", "undocumented", "requires access"
         ]):
@@ -542,15 +386,6 @@ class DreadAssessment:
         return max(1, min(10, discoverability_score))
     
     def assess_multiple_threats(self, threats_data: List[Dict[str, Any]]) -> List[DreadScore]:
-        """
-        Assess multiple threats using DREAD methodology.
-        
-        Args:
-            threats_data: List of threat dictionaries with required fields
-            
-        Returns:
-            List of DREAD scores for all assessed threats
-        """
         self.dread_scores = []
         
         for threat_data in threats_data:
@@ -569,25 +404,15 @@ class DreadAssessment:
         return self.dread_scores
     
     def generate_comprehensive_report(self) -> Dict[str, Any]:
-        """
-        Generate comprehensive DREAD assessment report.
-        
-        Returns:
-            Complete analysis report with statistics, prioritization, and recommendations
-        """
         if not self.dread_scores:
             return {"error": "No DREAD scores available. Run assessment first."}
         
-        # Calculate risk metrics
         risk_metrics = self.risk_calculator.calculate_risk_metrics(self.dread_scores)
         
-        # Prioritize threats
         prioritized_threats = self.threat_prioritizer.prioritize_threats(self.dread_scores)
         
-        # Generate priority matrix
         priority_matrix = self.threat_prioritizer.generate_priority_matrix(self.dread_scores)
         
-        # Generate recommendations
         recommendations = self._generate_dread_recommendations()
         
         report = {
@@ -616,12 +441,9 @@ class DreadAssessment:
         return report
     
     def _analyze_threats_by_component(self) -> Dict[str, Any]:
-        """Analyze DREAD scores grouped by affected component."""
         component_analysis = {}
         
-        # Group threats by component
         for dread_score in self.dread_scores:
-            # Extract component from threat_id (assuming format: component_threat_type_number)
             component = dread_score.threat_id.split('_')[0] if '_' in dread_score.threat_id else "unknown"
             
             if component not in component_analysis:
@@ -639,7 +461,6 @@ class DreadAssessment:
             comp_data["max_risk_score"] = max(comp_data["max_risk_score"], dread_score.average_score)
             comp_data["risk_distribution"][dread_score.risk_level] += 1
         
-        # Calculate averages
         for component, data in component_analysis.items():
             if data["threat_count"] > 0:
                 data["average_risk_score"] = round(data["total_risk_score"] / data["threat_count"], 2)
@@ -647,10 +468,8 @@ class DreadAssessment:
         return component_analysis
     
     def _generate_dread_recommendations(self) -> List[Dict[str, Any]]:
-        """Generate recommendations based on DREAD analysis results."""
         recommendations = []
         
-        # High-level strategic recommendations
         critical_count = sum(1 for score in self.dread_scores if score.risk_level == "CRITICAL")
         high_count = sum(1 for score in self.dread_scores if score.risk_level == "HIGH")
         
@@ -678,7 +497,6 @@ class DreadAssessment:
                 ]
             })
         
-        # Component-specific recommendations
         component_analysis = self._analyze_threats_by_component()
         for component, data in component_analysis.items():
             if data["average_risk_score"] >= 7:
@@ -693,7 +511,6 @@ class DreadAssessment:
                     ]
                 })
         
-        # DREAD component-specific recommendations
         avg_scores = self.risk_calculator.calculate_risk_metrics(self.dread_scores)
         component_scores = avg_scores.get("component_analysis", {})
         
@@ -725,7 +542,6 @@ class DreadAssessment:
         return recommendations
     
     def export_assessment(self, output_path: str = "outputs/dread_assessment.json") -> None:
-        """Export DREAD assessment results to JSON file."""
         report = self.generate_comprehensive_report()
         
         output_file = Path(output_path)
@@ -737,12 +553,6 @@ class DreadAssessment:
         logger.info(f"DREAD assessment exported to {output_path}")
     
     def load_threats_from_stride(self, stride_results_path: str) -> None:
-        """
-        Load threats from STRIDE analysis results for DREAD assessment.
-        
-        Args:
-            stride_results_path: Path to STRIDE analysis results JSON file
-        """
         try:
             with open(stride_results_path, 'r') as f:
                 stride_data = json.load(f)
@@ -754,13 +564,9 @@ class DreadAssessment:
         except Exception as e:
             logger.error(f"Error loading STRIDE results: {e}")
 
-# Example usage and testing functions
 def main():
-    """Main function for testing the DREAD assessment module."""
-    # Initialize DREAD assessment
     dread_assessment = DreadAssessment()
     
-    # Example threat data (would normally come from STRIDE analysis)
     sample_threats = [
         {
             "id": "inverter_001_SPOOFING_1",
@@ -778,14 +584,11 @@ def main():
         }
     ]
     
-    # Perform DREAD assessment
     dread_scores = dread_assessment.assess_multiple_threats(sample_threats)
     
-    # Generate and export report
     report = dread_assessment.generate_comprehensive_report()
     dread_assessment.export_assessment()
     
-    # Print summary
     print(f"DREAD Assessment Results:")
     print(f"Threats assessed: {report['summary']['total_threats_assessed']}")
     print(f"Average risk score: {report['summary']['average_risk_score']}")

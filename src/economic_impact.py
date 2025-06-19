@@ -1,20 +1,3 @@
-"""
-Economic Impact Analysis Module
-
-This module analyzes the economic implications of cybersecurity threats
-and vulnerabilities in solar inverter systems, with specific focus on
-South Australia's energy market dynamics.
-
-Key Components:
-- EconomicImpactCalculator: Main economic analysis engine
-- SpotPriceAnalyzer: Electricity spot price analysis and modeling
-- OutageImpactAnalyzer: Economic impact of system outages
-- MarketDisruptionModeler: Grid-level disruption economic modeling
-
-This module addresses the research gap in understanding economic
-consequences of solar inverter cybersecurity incidents.
-"""
-
 import json
 import logging
 import pandas as pd
@@ -26,11 +9,9 @@ from dataclasses import dataclass, field
 from enum import Enum
 import statistics
 
-# Configure logging
 logger = logging.getLogger(__name__)
 
 class AttackScenario(Enum):
-    """Different types of cyberattack scenarios for economic analysis."""
     SINGLE_INVERTER_COMPROMISE = "SINGLE_INVERTER_COMPROMISE"
     MULTIPLE_INVERTER_ATTACK = "MULTIPLE_INVERTER_ATTACK"
     GATEWAY_COMPROMISE = "GATEWAY_COMPROMISE"
@@ -40,7 +21,6 @@ class AttackScenario(Enum):
     DENIAL_OF_SERVICE = "DENIAL_OF_SERVICE"
 
 class EconomicSector(Enum):
-    """Economic sectors affected by solar inverter disruptions."""
     RESIDENTIAL = "RESIDENTIAL"
     COMMERCIAL = "COMMERCIAL"
     INDUSTRIAL = "INDUSTRIAL"
@@ -50,12 +30,6 @@ class EconomicSector(Enum):
 
 @dataclass
 class EconomicImpact:
-    """
-    Represents economic impact of a cybersecurity incident.
-    
-    This dataclass models the various economic consequences
-    of solar inverter cybersecurity incidents.
-    """
     scenario: AttackScenario
     duration_hours: float
     affected_capacity_mw: float
@@ -68,7 +42,6 @@ class EconomicImpact:
     impact_timestamp: datetime = field(default_factory=datetime.now)
     
     def __post_init__(self):
-        """Calculate total economic impact after initialization."""
         self.total_economic_impact = (
             sum(self.direct_costs.values()) +
             sum(self.indirect_costs.values()) +
@@ -77,7 +50,6 @@ class EconomicImpact:
         )
     
     def to_dict(self) -> Dict[str, Any]:
-        """Convert economic impact to dictionary."""
         return {
             "scenario": self.scenario.value,
             "duration_hours": self.duration_hours,
@@ -93,7 +65,6 @@ class EconomicImpact:
 
 @dataclass
 class SpotPriceData:
-    """Historical electricity spot price data for analysis."""
     timestamp: datetime
     price_aud_per_mwh: float
     demand_mw: float
@@ -101,7 +72,6 @@ class SpotPriceData:
     region: str = "SA1"  # South Australia region code
     
     def to_dict(self) -> Dict[str, Any]:
-        """Convert spot price data to dictionary."""
         return {
             "timestamp": self.timestamp.isoformat(),
             "price_aud_per_mwh": self.price_aud_per_mwh,
@@ -111,14 +81,6 @@ class SpotPriceData:
         }
 
 class SpotPriceAnalyzer:
-    """
-    Analyzes electricity spot price data and models price impacts
-    of solar inverter cybersecurity incidents.
-    
-    This class provides economic modeling capabilities specific
-    to South Australia's volatile electricity market.
-    """
-    
     def __init__(self, historical_data_path: Optional[str] = None):
         self.historical_data: List[SpotPriceData] = []
         self.price_volatility_metrics = {}
@@ -129,7 +91,6 @@ class SpotPriceAnalyzer:
             self._generate_synthetic_data()
     
     def _load_historical_data(self, data_path: str) -> None:
-        """Load historical spot price data from file."""
         try:
             with open(data_path, 'r') as f:
                 data = json.load(f)
@@ -150,16 +111,13 @@ class SpotPriceAnalyzer:
             self._generate_synthetic_data()
     
     def _generate_synthetic_data(self) -> None:
-        """Generate synthetic spot price data for analysis."""
         logger.info("Generating synthetic spot price data for SA market")
         
-        # Generate 365 days of hourly data
         start_date = datetime.now() - timedelta(days=365)
         
         for i in range(365 * 24):
             timestamp = start_date + timedelta(hours=i)
             
-            # Model SA's high price volatility and renewable penetration
             base_price = self._calculate_base_price(timestamp)
             volatility_factor = self._calculate_volatility_factor(timestamp)
             renewable_factor = self._calculate_renewable_factor(timestamp)
@@ -170,7 +128,7 @@ class SpotPriceAnalyzer:
             
             spot_data = SpotPriceData(
                 timestamp=timestamp,
-                price_aud_per_mwh=max(0, price),  # Ensure non-negative prices
+                price_aud_per_mwh=max(0, price), 
                 demand_mw=demand,
                 renewable_generation_mw=renewable_gen
             )
@@ -180,37 +138,31 @@ class SpotPriceAnalyzer:
         logger.info(f"Generated {len(self.historical_data)} synthetic price records")
     
     def _calculate_base_price(self, timestamp: datetime) -> float:
-        """Calculate base electricity price based on time patterns."""
         hour = timestamp.hour
         day_of_week = timestamp.weekday()
         month = timestamp.month
         
-        # Base price patterns (AUD/MWh)
-        if 6 <= hour <= 9 or 17 <= hour <= 21:  # Peak hours
+        if 6 <= hour <= 9 or 17 <= hour <= 21:  
             base_price = 150
-        elif 10 <= hour <= 16:  # Day hours
+        elif 10 <= hour <= 16:  
             base_price = 80
-        else:  # Off-peak hours
+        else:
             base_price = 45
         
-        # Weekend adjustments
-        if day_of_week >= 5:  # Weekend
+        if day_of_week >= 5:
             base_price *= 0.8
         
-        # Seasonal adjustments
-        if month in [12, 1, 2]:  # Summer (higher AC demand)
+    
+        if month in [12, 1, 2]:  
             base_price *= 1.3
-        elif month in [6, 7, 8]:  # Winter (higher heating demand)
+        elif month in [6, 7, 8]: 
             base_price *= 1.1
         
         return base_price
     
     def _calculate_volatility_factor(self, timestamp: datetime) -> float:
-        """Calculate price volatility factor."""
-        # SA has high price volatility - use random factors
         import random
         
-        # Higher volatility during peak hours and extreme weather
         hour = timestamp.hour
         if 6 <= hour <= 9 or 17 <= hour <= 21:
             # Peak hours have higher volatility
