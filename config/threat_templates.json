@@ -1,0 +1,1014 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "created_date": "2024-06-19",
+    "description": "STRIDE threat templates for solar inverter systems",
+    "author": "Dineth Katanwala",
+    "last_updated": "2024-06-19"
+  },
+  "threat_categories": {
+    "SPOOFING": {
+      "description": "Identity spoofing attacks where attackers impersonate legitimate entities",
+      "common_vectors": ["credential_theft", "certificate_spoofing", "protocol_manipulation"],
+      "impact_areas": ["authentication", "trust", "access_control"]
+    },
+    "TAMPERING": {
+      "description": "Unauthorized modification of data, systems, or communications",
+      "common_vectors": ["data_modification", "firmware_injection", "configuration_changes"],
+      "impact_areas": ["integrity", "system_behavior", "data_accuracy"]
+    },
+    "REPUDIATION": {
+      "description": "Denial of actions performed, lack of accountability",
+      "common_vectors": ["log_deletion", "timestamp_manipulation", "identity_confusion"],
+      "impact_areas": ["accountability", "forensics", "compliance"]
+    },
+    "INFORMATION_DISCLOSURE": {
+      "description": "Unauthorized access to sensitive information",
+      "common_vectors": ["data_interception", "credential_exposure", "configuration_disclosure"],
+      "impact_areas": ["confidentiality", "privacy", "competitive_advantage"]
+    },
+    "DENIAL_OF_SERVICE": {
+      "description": "Attacks that disrupt or prevent legitimate system access",
+      "common_vectors": ["resource_exhaustion", "network_flooding", "system_overload"],
+      "impact_areas": ["availability", "service_continuity", "reliability"]
+    },
+    "ELEVATION_OF_PRIVILEGE": {
+      "description": "Gaining higher privileges than intended or authorized",
+      "common_vectors": ["privilege_escalation", "authorization_bypass", "admin_access"],
+      "impact_areas": ["authorization", "system_control", "administrative_access"]
+    }
+  },
+  "component_threat_templates": {
+    "solar_inverter": {
+      "SPOOFING": [
+        {
+          "template_id": "INV_SPOOF_001",
+          "title": "Inverter Identity Spoofing via Default Credentials",
+          "description": "Attacker impersonates legitimate solar inverter by exploiting default or weak authentication credentials",
+          "attack_vector": "Default credential exploitation",
+          "preconditions": ["Default credentials unchanged", "Network access to inverter"],
+          "attack_steps": [
+            "Discover inverter IP address through network scanning",
+            "Attempt authentication with known default credentials",
+            "Gain administrative access to inverter interface",
+            "Impersonate inverter in communications with other systems"
+          ],
+          "impact_description": "Unauthorized control of power generation, potential grid stability issues",
+          "affected_assets": ["inverter_control_system", "power_generation", "grid_connection"],
+          "likelihood_factors": {
+            "default_credentials_present": 5,
+            "network_exposure": 4,
+            "manufacturer_credential_database": 3
+          },
+          "impact_factors": {
+            "api_access_control": 4,
+            "system_functionality": 4,
+            "data_access": 3
+          },
+          "detection_indicators": [
+            "API requests without proper authentication headers",
+            "Authentication bypass attempts in logs",
+            "Unusual API usage patterns"
+          ],
+          "mitigation_strategies": [
+            "Implement strong authentication (OAuth 2.0, JWT)",
+            "Use multi-factor authentication",
+            "Implement proper session management",
+            "Monitor authentication attempts",
+            "Regular security testing of authentication mechanisms"
+          ]
+        }
+      ],
+      "TAMPERING": [
+        {
+          "template_id": "API_TAMP_001",
+          "title": "API Request Manipulation",
+          "description": "Modifying API requests to perform unauthorized actions or access restricted data",
+          "attack_vector": "Request parameter manipulation",
+          "preconditions": ["API access obtained", "Insufficient input validation"],
+          "attack_steps": [
+            "Intercept legitimate API requests",
+            "Modify request parameters, headers, or body",
+            "Submit manipulated requests to API",
+            "Perform unauthorized actions or data access"
+          ],
+          "impact_description": "Unauthorized system modifications, data corruption, privilege escalation",
+          "affected_assets": ["api_integrity", "system_data", "business_logic"],
+          "likelihood_factors": {
+            "input_validation": 3,
+            "api_security": 3,
+            "request_signing": 2
+          },
+          "impact_factors": {
+            "data_integrity": 4,
+            "business_logic": 4,
+            "system_control": 3
+          },
+          "detection_indicators": [
+            "Malformed or suspicious API requests",
+            "Unexpected parameter values",
+            "API requests violating business logic rules"
+          ],
+          "mitigation_strategies": [
+            "Implement comprehensive input validation",
+            "Use API request signing",
+            "Deploy API security gateways",
+            "Monitor API request patterns",
+            "Implement rate limiting and throttling"
+          ]
+        }
+      ],
+      "INFORMATION_DISCLOSURE": [
+        {
+          "template_id": "API_INFO_001",
+          "title": "API Data Leakage",
+          "description": "Unauthorized access to sensitive data through API vulnerabilities",
+          "attack_vector": "API data exposure",
+          "preconditions": ["API access available", "Insufficient access controls"],
+          "attack_steps": [
+            "Enumerate API endpoints and parameters",
+            "Test for unauthorized data access",
+            "Exploit access control vulnerabilities",
+            "Extract sensitive information"
+          ],
+          "impact_description": "Sensitive data exposure, privacy violations, competitive intelligence theft",
+          "affected_assets": ["sensitive_data", "user_privacy", "business_information"],
+          "likelihood_factors": {
+            "access_controls": 3,
+            "data_classification": 2,
+            "api_documentation": 4
+          },
+          "impact_factors": {
+            "data_sensitivity": 4,
+            "privacy_impact": 3,
+            "competitive_advantage": 3
+          },
+          "detection_indicators": [
+            "Large volumes of API data requests",
+            "Access to unauthorized data endpoints",
+            "Unusual data access patterns"
+          ],
+          "mitigation_strategies": [
+            "Implement proper access controls and authorization",
+            "Use data classification and protection",
+            "Monitor API data access patterns",
+            "Implement data loss prevention",
+            "Regular API security assessments"
+          ]
+        }
+      ],
+      "DENIAL_OF_SERVICE": [
+        {
+          "template_id": "API_DOS_001",
+          "title": "API Rate Limit Exhaustion",
+          "description": "Overwhelming API with requests to exhaust rate limits and cause service denial",
+          "attack_vector": "API flooding",
+          "preconditions": ["API access available", "Insufficient rate limiting"],
+          "attack_steps": [
+            "Identify API endpoints and rate limits",
+            "Generate high-volume API requests",
+            "Exhaust API rate limits or resources",
+            "Cause service degradation or unavailability"
+          ],
+          "impact_description": "API service unavailability, impact on legitimate users",
+          "affected_assets": ["api_availability", "service_quality", "user_experience"],
+          "likelihood_factors": {
+            "rate_limiting": 2,
+            "api_protection": 2,
+            "monitoring": 3
+          },
+          "impact_factors": {
+            "service_availability": 4,
+            "user_impact": 3,
+            "business_continuity": 3
+          },
+          "detection_indicators": [
+            "High API request volumes",
+            "Rate limit threshold breaches",
+            "API response time degradation"
+          ],
+          "mitigation_strategies": [
+            "Implement robust rate limiting",
+            "Deploy API DDoS protection",
+            "Monitor API performance metrics",
+            "Use API throttling mechanisms",
+            "Implement circuit breaker patterns"
+          ]
+        }
+      ],
+      "ELEVATION_OF_PRIVILEGE": [
+        {
+          "template_id": "API_PRIV_001",
+          "title": "API Authorization Bypass",
+          "description": "Bypassing API authorization controls to access restricted functionality",
+          "attack_vector": "Authorization bypass",
+          "preconditions": ["API access obtained", "Weak authorization implementation"],
+          "attack_steps": [
+            "Analyze API authorization mechanisms",
+            "Identify authorization bypass vulnerabilities",
+            "Craft requests to bypass authorization checks",
+            "Access restricted API functionality"
+          ],
+          "impact_description": "Unauthorized access to restricted functionality, administrative operations",
+          "affected_assets": ["api_authorization", "restricted_functions", "administrative_access"],
+          "likelihood_factors": {
+            "authorization_implementation": 3,
+            "security_testing": 2,
+            "access_control_complexity": 3
+          },
+          "impact_factors": {
+            "functional_access": 4,
+            "administrative_control": 5,
+            "system_integrity": 4
+          },
+          "detection_indicators": [
+            "Access to restricted API endpoints",
+            "Unauthorized administrative actions",
+            "Authorization bypass attempts"
+          ],
+          "mitigation_strategies": [
+            "Implement robust authorization mechanisms",
+            "Use role-based access control (RBAC)",
+            "Regular authorization testing",
+            "Monitor access to restricted functions",
+            "Implement principle of least privilege"
+          ]
+        }
+      ]
+    },
+    "communication_gateway": {
+      "SPOOFING": [
+        {
+          "template_id": "GW_SPOOF_001",
+          "title": "Gateway Device Impersonation",
+          "description": "Impersonating communication gateway to intercept or manipulate data flows",
+          "attack_vector": "Device identity spoofing",
+          "preconditions": ["Network access", "Weak device authentication"],
+          "attack_steps": [
+            "Monitor network communications to identify gateway",
+            "Replicate gateway network identity",
+            "Position spoofed gateway in communication path",
+            "Intercept or manipulate data flows"
+          ],
+          "impact_description": "Data interception, communication manipulation, man-in-the-middle attacks",
+          "affected_assets": ["communication_integrity", "data_flows", "device_trust"],
+          "likelihood_factors": {
+            "device_authentication": 3,
+            "network_security": 3,
+            "certificate_validation": 2
+          },
+          "impact_factors": {
+            "communication_integrity": 4,
+            "data_manipulation": 4,
+            "trust_relationship": 3
+          },
+          "detection_indicators": [
+            "Duplicate device identities on network",
+            "Unexpected communication patterns",
+            "Certificate validation failures"
+          ],
+          "mitigation_strategies": [
+            "Implement device certificates and PKI",
+            "Use mutual authentication protocols",
+            "Monitor for duplicate device identities",
+            "Implement network access control",
+            "Deploy certificate pinning"
+          ]
+        }
+      ],
+      "TAMPERING": [
+        {
+          "template_id": "GW_TAMP_001",
+          "title": "Data Flow Manipulation",
+          "description": "Modifying data as it passes through the communication gateway",
+          "attack_vector": "Data modification in transit",
+          "preconditions": ["Gateway access obtained", "Unencrypted data flows"],
+          "attack_steps": [
+            "Gain access to gateway system",
+            "Identify data flow processing logic",
+            "Modify data transformation or forwarding rules",
+            "Inject malicious data or alter legitimate data"
+          ],
+          "impact_description": "Data corruption, false readings, incorrect control commands",
+          "affected_assets": ["data_integrity", "monitoring_accuracy", "control_systems"],
+          "likelihood_factors": {
+            "gateway_security": 3,
+            "data_encryption": 2,
+            "integrity_checking": 2
+          },
+          "impact_factors": {
+            "data_accuracy": 4,
+            "control_integrity": 4,
+            "monitoring_reliability": 3
+          },
+          "detection_indicators": [
+            "Data consistency anomalies",
+            "Unexpected data transformation patterns",
+            "Integrity check failures"
+          ],
+          "mitigation_strategies": [
+            "Implement end-to-end data encryption",
+            "Use data integrity verification",
+            "Monitor data transformation processes",
+            "Implement tamper-evident logging",
+            "Deploy data validation checks"
+          ]
+        }
+      ],
+      "DENIAL_OF_SERVICE": [
+        {
+          "template_id": "GW_DOS_001",
+          "title": "Gateway Resource Exhaustion",
+          "description": "Overwhelming gateway resources to disrupt communication services",
+          "attack_vector": "Resource exhaustion",
+          "preconditions": ["Network access to gateway", "Limited gateway resources"],
+          "attack_steps": [
+            "Identify gateway communication interfaces",
+            "Generate high-volume traffic or requests",
+            "Exhaust gateway processing or memory resources",
+            "Cause gateway service degradation or failure"
+          ],
+          "impact_description": "Communication network disruption, loss of monitoring and control",
+          "affected_assets": ["gateway_availability", "communication_services", "network_connectivity"],
+          "likelihood_factors": {
+            "resource_monitoring": 2,
+            "ddos_protection": 1,
+            "traffic_filtering": 2
+          },
+          "impact_factors": {
+            "communication_availability": 5,
+            "monitoring_capability": 4,
+            "control_capability": 4
+          },
+          "detection_indicators": [
+            "High resource utilization on gateway",
+            "Communication timeouts or failures",
+            "Network performance degradation"
+          ],
+          "mitigation_strategies": [
+            "Implement resource monitoring and limits",
+            "Deploy traffic filtering and rate limiting",
+            "Use redundant gateway infrastructure",
+            "Implement quality of service controls",
+            "Monitor gateway performance metrics"
+          ]
+        }
+      ]
+    },
+    "database": {
+      "INFORMATION_DISCLOSURE": [
+        {
+          "template_id": "DB_INFO_001",
+          "title": "Database Credential Exposure",
+          "description": "Unauthorized access to stored credentials and sensitive configuration data",
+          "attack_vector": "Database access vulnerability",
+          "preconditions": ["Database access obtained", "Unencrypted stored data"],
+          "attack_steps": [
+            "Gain access to database system",
+            "Identify tables containing sensitive information",
+            "Extract credentials, API keys, and configuration data",
+            "Use extracted information for further attacks"
+          ],
+          "impact_description": "Credential theft, system compromise, cascade security failures",
+          "affected_assets": ["stored_credentials", "api_keys", "configuration_data"],
+          "likelihood_factors": {
+            "database_security": 2,
+            "data_encryption": 1,
+            "access_controls": 2
+          },
+          "impact_factors": {
+            "credential_compromise": 5,
+            "system_access": 5,
+            "cascade_impact": 4
+          },
+          "detection_indicators": [
+            "Unauthorized database access attempts",
+            "Large data extractions",
+            "Access to sensitive data tables"
+          ],
+          "mitigation_strategies": [
+            "Encrypt sensitive data at rest",
+            "Implement strong database access controls",
+            "Use database activity monitoring",
+            "Implement credential management systems",
+            "Regular database security assessments"
+          ]
+        }
+      ],
+      "TAMPERING": [
+        {
+          "template_id": "DB_TAMP_001",
+          "title": "Configuration Data Manipulation",
+          "description": "Unauthorized modification of system configuration stored in database",
+          "attack_vector": "Database data modification",
+          "preconditions": ["Database write access", "Insufficient integrity controls"],
+          "attack_steps": [
+            "Gain write access to database",
+            "Identify critical configuration tables",
+            "Modify configuration parameters",
+            "Potentially hide evidence of changes"
+          ],
+          "impact_description": "System misconfiguration, operational disruption, security control bypass",
+          "affected_assets": ["system_configuration", "operational_parameters", "security_settings"],
+          "likelihood_factors": {
+            "database_permissions": 3,
+            "change_auditing": 2,
+            "integrity_protection": 2
+          },
+          "impact_factors": {
+            "system_operation": 4,
+            "security_controls": 4,
+            "compliance_status": 3
+          },
+          "detection_indicators": [
+            "Unexpected configuration changes",
+            "Database modification without authorization",
+            "System behavior changes"
+          ],
+          "mitigation_strategies": [
+            "Implement database change auditing",
+            "Use database integrity constraints",
+            "Deploy configuration change monitoring",
+            "Implement approval workflows for changes",
+            "Regular configuration backup and validation"
+          ]
+        }
+      ]
+    },
+    "web_interface": {
+      "SPOOFING": [
+        {
+          "template_id": "WEB_SPOOF_001",
+          "title": "Session Hijacking",
+          "description": "Hijacking user sessions to impersonate legitimate users",
+          "attack_vector": "Session management vulnerability",
+          "preconditions": ["Weak session management", "Network access to traffic"],
+          "attack_steps": [
+            "Intercept or predict session identifiers",
+            "Hijack active user sessions",
+            "Impersonate legitimate users",
+            "Perform unauthorized actions"
+          ],
+          "impact_description": "Unauthorized administrative access, system configuration changes",
+          "affected_assets": ["user_sessions", "administrative_access", "system_configuration"],
+          "likelihood_factors": {
+            "session_security": 2,
+            "https_enforcement": 2,
+            "session_monitoring": 1
+          },
+          "impact_factors": {
+            "administrative_access": 4,
+            "configuration_control": 4,
+            "user_impersonation": 3
+          },
+          "detection_indicators": [
+            "Multiple concurrent sessions for same user",
+            "Session access from different locations",
+            "Unusual administrative activities"
+          ],
+          "mitigation_strategies": [
+            "Implement secure session management",
+            "Use HTTPS for all communications",
+            "Implement session timeout controls",
+            "Monitor session activities",
+            "Use secure session cookies"
+          ]
+        }
+      ],
+      "TAMPERING": [
+        {
+          "template_id": "WEB_TAMP_001",
+          "title": "Cross-Site Request Forgery (CSRF)",
+          "description": "Tricking users into performing unintended actions on web interface",
+          "attack_vector": "CSRF attack",
+          "preconditions": ["User authenticated to web interface", "No CSRF protection"],
+          "attack_steps": [
+            "Craft malicious web page or email",
+            "Include hidden requests to target web interface",
+            "Trick authenticated user into visiting malicious content",
+            "Execute unauthorized actions using user's session"
+          ],
+          "impact_description": "Unauthorized configuration changes, unintended system modifications",
+          "affected_assets": ["web_interface_integrity", "system_configuration", "user_actions"],
+          "likelihood_factors": {
+            "csrf_protection": 1,
+            "user_awareness": 2,
+            "request_validation": 2
+          },
+          "impact_factors": {
+            "configuration_changes": 4,
+            "system_integrity": 3,
+            "user_trust": 2
+          },
+          "detection_indicators": [
+            "Unexpected configuration changes",
+            "Actions performed without user knowledge",
+            "Suspicious referrer headers in requests"
+          ],
+          "mitigation_strategies": [
+            "Implement CSRF tokens",
+            "Validate request origins",
+            "Use SameSite cookie attributes",
+            "Implement user action confirmation",
+            "Deploy content security policies"
+          ]
+        }
+      ],
+      "INFORMATION_DISCLOSURE": [
+        {
+          "template_id": "WEB_INFO_001",
+          "title": "Sensitive Information Exposure",
+          "description": "Exposure of sensitive system information through web interface",
+          "attack_vector": "Information leakage",
+          "preconditions": ["Web interface accessible", "Insufficient information protection"],
+          "attack_steps": [
+            "Access web interface pages and functions",
+            "Identify exposed sensitive information",
+            "Extract system configuration details",
+            "Use information for reconnaissance"
+          ],
+          "impact_description": "System architecture exposure, credential disclosure, attack planning facilitation",
+          "affected_assets": ["system_information", "configuration_details", "operational_data"],
+          "likelihood_factors": {
+            "information_classification": 2,
+            "access_controls": 3,
+            "error_handling": 2
+          },
+          "impact_factors": {
+            "reconnaissance_value": 3,
+            "system_exposure": 3,
+            "attack_facilitation": 4
+          },
+          "detection_indicators": [
+            "Extensive web interface exploration",
+            "Access to information-rich pages",
+            "Unusual pattern of page requests"
+          ],
+          "mitigation_strategies": [
+            "Implement proper information classification",
+            "Use secure error handling",
+            "Deploy access controls for sensitive pages",
+            "Minimize information disclosure in responses",
+            "Regular security testing of web interface"
+          ]
+        }
+      ]
+    }
+  },
+  "attack_patterns": {
+    "credential_attacks": {
+      "description": "Attacks targeting authentication credentials",
+      "common_techniques": ["brute_force", "credential_stuffing", "default_credentials"],
+      "affected_components": ["solar_inverter", "web_interface", "api_endpoint"],
+      "mitigation_categories": ["strong_authentication", "account_lockout", "monitoring"]
+    },
+    "network_attacks": {
+      "description": "Attacks targeting network communications",
+      "common_techniques": ["man_in_the_middle", "protocol_exploitation", "traffic_analysis"],
+      "affected_components": ["communication_gateway", "all_networked_components"],
+      "mitigation_categories": ["encryption", "certificate_validation", "network_segmentation"]
+    },
+    "injection_attacks": {
+      "description": "Attacks involving malicious code or data injection",
+      "common_techniques": ["command_injection", "firmware_injection", "data_injection"],
+      "affected_components": ["solar_inverter", "api_endpoint", "database"],
+      "mitigation_categories": ["input_validation", "code_signing", "sandboxing"]
+    },
+    "availability_attacks": {
+      "description": "Attacks targeting system availability",
+      "common_techniques": ["ddos", "resource_exhaustion", "service_disruption"],
+      "affected_components": ["all_components"],
+      "mitigation_categories": ["rate_limiting", "resource_monitoring", "redundancy"]
+    }
+  },
+  "mitigation_strategies": {
+    "preventive_controls": {
+      "authentication_strengthening": [
+        "Implement multi-factor authentication",
+        "Use strong password policies",
+        "Deploy certificate-based authentication",
+        "Implement account lockout mechanisms"
+      ],
+      "encryption_implementation": [
+        "Use TLS for all communications",
+        "Implement end-to-end encryption",
+        "Encrypt data at rest",
+        "Use strong encryption algorithms"
+      ],
+      "access_control_enhancement": [
+        "Implement role-based access control",
+        "Use principle of least privilege",
+        "Deploy network segmentation",
+        "Implement API access controls"
+      ],
+      "input_validation": [
+        "Validate all input parameters",
+        "Implement output encoding",
+        "Use parameterized queries",
+        "Deploy content filtering"
+      ]
+    },
+    "detective_controls": [
+      "Implement comprehensive logging",
+      "Deploy intrusion detection systems",
+      "Monitor system performance",
+      "Use security information and event management (SIEM)",
+      "Implement anomaly detection"
+    ],
+    "responsive_controls": [
+      "Develop incident response procedures",
+      "Implement automated response mechanisms",
+      "Create backup and recovery procedures",
+      "Establish communication protocols"
+    ]
+  }
+}": {
+            "power_generation_capacity": 4,
+            "grid_connection_criticality": 4,
+            "downstream_system_trust": 3
+          },
+          "detection_indicators": [
+            "Authentication from unexpected IP addresses",
+            "Configuration changes outside maintenance windows",
+            "Unusual command patterns or frequencies"
+          ],
+          "mitigation_strategies": [
+            "Change default credentials immediately upon installation",
+            "Implement strong password policies",
+            "Enable multi-factor authentication where available",
+            "Monitor authentication attempts and failures",
+            "Implement device certificates for authentication"
+          ],
+          "references": [
+            "CVE-2023-1002",
+            "NIST Cybersecurity Framework - Identify function"
+          ]
+        },
+        {
+          "template_id": "INV_SPOOF_002",
+          "title": "Modbus Device Impersonation",
+          "description": "Attacker spoofs Modbus device identity to inject malicious commands or intercept communications",
+          "attack_vector": "Modbus protocol vulnerability",
+          "preconditions": ["Unencrypted Modbus communication", "Network access to Modbus traffic"],
+          "attack_steps": [
+            "Monitor Modbus communications to learn device addressing",
+            "Craft Modbus messages with spoofed device identifiers",
+            "Inject malicious commands or responses",
+            "Potentially cause inverter malfunction or data corruption"
+          ],
+          "impact_description": "Unauthorized control commands, data corruption, potential equipment damage",
+          "affected_assets": ["modbus_communications", "control_systems", "monitoring_data"],
+          "likelihood_factors": {
+            "unencrypted_modbus": 5,
+            "network_access": 4,
+            "protocol_knowledge": 3
+          },
+          "impact_factors": {
+            "control_system_access": 5,
+            "equipment_damage_potential": 4,
+            "monitoring_data_integrity": 3
+          },
+          "detection_indicators": [
+            "Duplicate Modbus device IDs on network",
+            "Unexpected Modbus command patterns",
+            "Responses from unknown device addresses"
+          ],
+          "mitigation_strategies": [
+            "Implement Modbus security extensions",
+            "Use encrypted communication protocols",
+            "Deploy network segmentation",
+            "Monitor Modbus traffic for anomalies",
+            "Implement device authentication"
+          ]
+        }
+      ],
+      "TAMPERING": [
+        {
+          "template_id": "INV_TAMP_001",
+          "title": "Firmware Tampering via Insecure Update Mechanism",
+          "description": "Attacker modifies inverter firmware through compromised or insecure update process",
+          "attack_vector": "Insecure firmware update",
+          "preconditions": ["Insecure firmware update mechanism", "Network access or physical access"],
+          "attack_steps": [
+            "Identify firmware update mechanism and process",
+            "Intercept or replace legitimate firmware update",
+            "Inject malicious code into firmware image",
+            "Deploy tampered firmware to target inverter",
+            "Establish persistent control over device"
+          ],
+          "impact_description": "Complete device compromise, persistent malicious control, potential safety hazards",
+          "affected_assets": ["device_firmware", "control_logic", "safety_systems"],
+          "likelihood_factors": {
+            "insecure_update_process": 4,
+            "unsigned_firmware": 5,
+            "network_update_mechanism": 3
+          },
+          "impact_factors": {
+            "complete_device_control": 5,
+            "persistence_of_compromise": 5,
+            "safety_impact": 4
+          },
+          "detection_indicators": [
+            "Unexpected firmware version changes",
+            "Unusual device behavior after updates",
+            "Invalid firmware signatures or checksums"
+          ],
+          "mitigation_strategies": [
+            "Implement code signing for firmware",
+            "Use secure boot mechanisms",
+            "Verify firmware integrity before installation",
+            "Implement rollback capabilities",
+            "Monitor firmware version changes"
+          ]
+        },
+        {
+          "template_id": "INV_TAMP_002",
+          "title": "Configuration Parameter Tampering",
+          "description": "Unauthorized modification of critical inverter configuration parameters",
+          "attack_vector": "Configuration manipulation",
+          "preconditions": ["Administrative access obtained", "Writable configuration parameters"],
+          "attack_steps": [
+            "Gain administrative access to inverter",
+            "Identify critical configuration parameters",
+            "Modify parameters to cause malfunction or suboptimal operation",
+            "Potentially hide evidence of modification"
+          ],
+          "impact_description": "Suboptimal performance, potential equipment damage, grid compliance violations",
+          "affected_assets": ["configuration_data", "operational_parameters", "grid_compliance"],
+          "likelihood_factors": {
+            "administrative_access": 4,
+            "configuration_protection": 2,
+            "change_monitoring": 2
+          },
+          "impact_factors": {
+            "operational_impact": 4,
+            "compliance_violations": 3,
+            "equipment_damage": 3
+          },
+          "detection_indicators": [
+            "Unexpected configuration changes",
+            "Performance degradation without clear cause",
+            "Grid compliance parameter violations"
+          ],
+          "mitigation_strategies": [
+            "Implement configuration change logging",
+            "Use read-only configurations where possible",
+            "Implement configuration backup and restore",
+            "Monitor configuration parameters continuously",
+            "Implement change approval workflows"
+          ]
+        }
+      ],
+      "REPUDIATION": [
+        {
+          "template_id": "INV_REPU_001",
+          "title": "Operational Log Tampering",
+          "description": "Attacker modifies or deletes operational logs to hide malicious activities",
+          "attack_vector": "Log manipulation",
+          "preconditions": ["Access to log files", "Writable log storage"],
+          "attack_steps": [
+            "Gain access to inverter logging system",
+            "Identify relevant log entries to modify or delete",
+            "Alter timestamps or log content",
+            "Remove evidence of unauthorized activities"
+          ],
+          "impact_description": "Loss of forensic evidence, inability to trace security incidents",
+          "affected_assets": ["audit_logs", "operational_logs", "forensic_evidence"],
+          "likelihood_factors": {
+            "log_access_control": 3,
+            "log_integrity_protection": 2,
+            "centralized_logging": 2
+          },
+          "impact_factors": {
+            "forensic_capability": 4,
+            "incident_investigation": 4,
+            "compliance_reporting": 3
+          },
+          "detection_indicators": [
+            "Missing log entries or gaps in timeline",
+            "Log file timestamp anomalies",
+            "Unexpected log file modifications"
+          ],
+          "mitigation_strategies": [
+            "Implement write-once log storage",
+            "Use centralized log collection",
+            "Implement log integrity verification",
+            "Deploy log file monitoring",
+            "Use digital signatures for log entries"
+          ]
+        }
+      ],
+      "INFORMATION_DISCLOSURE": [
+        {
+          "template_id": "INV_INFO_001",
+          "title": "Power Generation Data Exposure",
+          "description": "Unauthorized access to sensitive power generation and operational data",
+          "attack_vector": "Data interception or unauthorized access",
+          "preconditions": ["Unencrypted data transmission", "Inadequate access controls"],
+          "attack_steps": [
+            "Intercept network communications containing operational data",
+            "Access stored data through compromised credentials",
+            "Extract sensitive information about power generation patterns",
+            "Potentially use data for competitive intelligence or system mapping"
+          ],
+          "impact_description": "Competitive intelligence theft, system reconnaissance for future attacks",
+          "affected_assets": ["generation_data", "operational_metrics", "system_architecture"],
+          "likelihood_factors": {
+            "unencrypted_transmission": 4,
+            "weak_access_controls": 4,
+            "data_classification": 2
+          },
+          "impact_factors": {
+            "competitive_advantage": 3,
+            "system_reconnaissance": 4,
+            "privacy_violation": 2
+          },
+          "detection_indicators": [
+            "Unusual data access patterns",
+            "Large data transfers or downloads",
+            "Access from unauthorized locations or times"
+          ],
+          "mitigation_strategies": [
+            "Encrypt all data transmissions",
+            "Implement strong access controls",
+            "Classify and protect sensitive data",
+            "Monitor data access and transfers",
+            "Implement data loss prevention controls"
+          ]
+        },
+        {
+          "template_id": "INV_INFO_002",
+          "title": "Network Configuration Disclosure",
+          "description": "Exposure of network configuration and system architecture information",
+          "attack_vector": "Configuration file access or network reconnaissance",
+          "preconditions": ["Accessible configuration files", "Network scanning capabilities"],
+          "attack_steps": [
+            "Perform network reconnaissance to map system architecture",
+            "Access configuration files containing network information",
+            "Document system topology and communication patterns",
+            "Use information for planning targeted attacks"
+          ],
+          "impact_description": "System architecture exposure, facilitates targeted attacks",
+          "affected_assets": ["network_topology", "system_configuration", "communication_protocols"],
+          "likelihood_factors": {
+            "configuration_protection": 3,
+            "network_visibility": 4,
+            "system_documentation": 3
+          },
+          "impact_factors": {
+            "attack_planning": 4,
+            "system_mapping": 4,
+            "vulnerability_identification": 3
+          },
+          "detection_indicators": [
+            "Extensive network scanning activity",
+            "Configuration file access attempts",
+            "Reconnaissance tool signatures"
+          ],
+          "mitigation_strategies": [
+            "Secure configuration files with appropriate permissions",
+            "Implement network segmentation",
+            "Deploy intrusion detection systems",
+            "Monitor network scanning activities",
+            "Limit system information disclosure"
+          ]
+        }
+      ],
+      "DENIAL_OF_SERVICE": [
+        {
+          "template_id": "INV_DOS_001",
+          "title": "Network Flooding Attack",
+          "description": "Overwhelming inverter network interface with excessive traffic to cause service disruption",
+          "attack_vector": "Network traffic flooding",
+          "preconditions": ["Network access to inverter", "Limited network resources"],
+          "attack_steps": [
+            "Identify inverter network interfaces and protocols",
+            "Generate high-volume network traffic targeting inverter",
+            "Overwhelm network interface or processing capabilities",
+            "Cause inverter to become unresponsive or malfunction"
+          ],
+          "impact_description": "Loss of inverter monitoring and control, potential power generation disruption",
+          "affected_assets": ["network_interface", "communication_protocols", "monitoring_systems"],
+          "likelihood_factors": {
+            "network_exposure": 4,
+            "ddos_protection": 1,
+            "resource_limits": 4
+          },
+          "impact_factors": {
+            "service_availability": 4,
+            "monitoring_loss": 3,
+            "control_capability": 4
+          },
+          "detection_indicators": [
+            "High network traffic volumes",
+            "Slow response times or timeouts",
+            "Resource utilization spikes"
+          ],
+          "mitigation_strategies": [
+            "Implement rate limiting and traffic filtering",
+            "Deploy DDoS protection mechanisms",
+            "Monitor network traffic patterns",
+            "Implement quality of service controls",
+            "Use redundant communication paths"
+          ]
+        },
+        {
+          "template_id": "INV_DOS_002",
+          "title": "Resource Exhaustion Attack",
+          "description": "Exhausting inverter computational or memory resources to cause system failure",
+          "attack_vector": "Resource consumption attack",
+          "preconditions": ["Access to inverter services", "Limited system resources"],
+          "attack_steps": [
+            "Identify resource-intensive operations or services",
+            "Generate requests designed to consume maximum resources",
+            "Exhaust CPU, memory, or storage resources",
+            "Cause system to become unstable or crash"
+          ],
+          "impact_description": "System instability, inverter shutdown, loss of power generation",
+          "affected_assets": ["system_resources", "operating_system", "application_services"],
+          "likelihood_factors": {
+            "resource_monitoring": 2,
+            "input_validation": 3,
+            "resource_limits": 2
+          },
+          "impact_factors": {
+            "system_stability": 5,
+            "power_generation": 4,
+            "recovery_time": 3
+          },
+          "detection_indicators": [
+            "High CPU or memory utilization",
+            "System performance degradation",
+            "Application crashes or errors"
+          ],
+          "mitigation_strategies": [
+            "Implement resource monitoring and limits",
+            "Use input validation and sanitization",
+            "Deploy system performance monitoring",
+            "Implement automatic recovery mechanisms",
+            "Use resource isolation techniques"
+          ]
+        }
+      ],
+      "ELEVATION_OF_PRIVILEGE": [
+        {
+          "template_id": "INV_PRIV_001",
+          "title": "Administrative Privilege Escalation",
+          "description": "Gaining administrative access through privilege escalation vulnerabilities",
+          "attack_vector": "Privilege escalation exploit",
+          "preconditions": ["User-level access obtained", "Privilege escalation vulnerability present"],
+          "attack_steps": [
+            "Gain initial user-level access to inverter system",
+            "Identify privilege escalation vulnerabilities",
+            "Exploit vulnerability to gain administrative privileges",
+            "Maintain persistent administrative access"
+          ],
+          "impact_description": "Complete system control, ability to modify any configuration or operation",
+          "affected_assets": ["administrative_functions", "system_configuration", "security_controls"],
+          "likelihood_factors": {
+            "privilege_separation": 2,
+            "vulnerability_patching": 3,
+            "access_monitoring": 2
+          },
+          "impact_factors": {
+            "system_control": 5,
+            "configuration_access": 5,
+            "security_bypass": 5
+          },
+          "detection_indicators": [
+            "Unexpected administrative actions",
+            "Privilege changes in user accounts",
+            "Access to restricted system areas"
+          ],
+          "mitigation_strategies": [
+            "Implement proper privilege separation",
+            "Regularly update and patch systems",
+            "Monitor administrative activities",
+            "Use least privilege principles",
+            "Implement mandatory access controls"
+          ]
+        }
+      ]
+    },
+    "api_endpoint": {
+      "SPOOFING": [
+        {
+          "template_id": "API_SPOOF_001",
+          "title": "API Authentication Bypass",
+          "description": "Bypassing API authentication mechanisms to impersonate legitimate clients",
+          "attack_vector": "Authentication bypass",
+          "preconditions": ["Weak authentication implementation", "API access available"],
+          "attack_steps": [
+            "Analyze API authentication mechanisms",
+            "Identify authentication bypass vulnerabilities",
+            "Craft requests that bypass authentication",
+            "Impersonate legitimate API clients"
+          ],
+          "impact_description": "Unauthorized API access, potential system control",
+          "affected_assets": ["api_authentication", "client_trust", "system_access"],
+          "likelihood_factors": {
+            "authentication_strength": 3,
+            "api_security_testing": 2,
+            "vulnerability_disclosure": 3
+          },
+          "impact_factors
