@@ -1,0 +1,148 @@
+{
+  "assessment_timestamp": "2025-06-19T13:57:43.960014",
+  "summary": {
+    "total_threats_assessed": 2,
+    "average_risk_score": 6.4,
+    "highest_risk_threat": "api_001_TAMPERING_1",
+    "critical_threats_count": 0
+  },
+  "risk_metrics": {
+    "count": 2,
+    "total_score_stats": {
+      "mean": 32,
+      "median": 32.0,
+      "std_dev": 2.83,
+      "min": 30,
+      "max": 34
+    },
+    "average_score_stats": {
+      "mean": 6.4,
+      "median": 6.4,
+      "std_dev": 0.57
+    },
+    "risk_level_distribution": {
+      "CRITICAL": 0,
+      "HIGH": 2,
+      "MEDIUM": 0,
+      "LOW": 0,
+      "MINIMAL": 0
+    },
+    "component_analysis": {
+      "damage": {
+        "mean": 7,
+        "median": 7.0,
+        "max": 8,
+        "min": 6
+      },
+      "reproducibility": {
+        "mean": 8.5,
+        "median": 8.5,
+        "max": 9,
+        "min": 8
+      },
+      "exploitability": {
+        "mean": 5,
+        "median": 5.0,
+        "max": 5,
+        "min": 5
+      },
+      "affected_users": {
+        "mean": 6.5,
+        "median": 6.5,
+        "max": 7,
+        "min": 6
+      },
+      "discoverability": {
+        "mean": 5,
+        "median": 5.0,
+        "max": 5,
+        "min": 5
+      }
+    }
+  },
+  "prioritized_threats": [
+    {
+      "threat_id": "api_001_TAMPERING_1",
+      "weighted_score": 6.9,
+      "risk_level": "HIGH"
+    },
+    {
+      "threat_id": "inverter_001_SPOOFING_1",
+      "weighted_score": 5.95,
+      "risk_level": "HIGH"
+    }
+  ],
+  "priority_matrix": {
+    "high_risk_high_exploitability": [
+      "inverter_001_SPOOFING_1",
+      "api_001_TAMPERING_1"
+    ],
+    "high_risk_low_exploitability": [],
+    "low_risk_high_exploitability": [],
+    "low_risk_low_exploitability": []
+  },
+  "component_analysis": {
+    "inverter": {
+      "threat_count": 1,
+      "total_risk_score": 6.0,
+      "average_risk_score": 6.0,
+      "max_risk_score": 6.0,
+      "risk_distribution": {
+        "CRITICAL": 0,
+        "HIGH": 1,
+        "MEDIUM": 0,
+        "LOW": 0,
+        "MINIMAL": 0
+      }
+    },
+    "api": {
+      "threat_count": 1,
+      "total_risk_score": 6.8,
+      "average_risk_score": 6.8,
+      "max_risk_score": 6.8,
+      "risk_distribution": {
+        "CRITICAL": 0,
+        "HIGH": 1,
+        "MEDIUM": 0,
+        "LOW": 0,
+        "MINIMAL": 0
+      }
+    }
+  },
+  "recommendations": [
+    {
+      "priority": "HIGH",
+      "category": "Impact Reduction",
+      "recommendation": "Implement damage limitation controls",
+      "action_items": [
+        "Deploy backup and recovery systems",
+        "Implement fault tolerance mechanisms",
+        "Establish business continuity procedures"
+      ]
+    }
+  ],
+  "detailed_scores": [
+    {
+      "threat_id": "inverter_001_SPOOFING_1",
+      "damage": 6,
+      "reproducibility": 8,
+      "exploitability": 5,
+      "affected_users": 6,
+      "discoverability": 5,
+      "total_score": 30,
+      "average_score": 6.0,
+      "risk_level": "HIGH"
+    },
+    {
+      "threat_id": "api_001_TAMPERING_1",
+      "damage": 8,
+      "reproducibility": 9,
+      "exploitability": 5,
+      "affected_users": 7,
+      "discoverability": 5,
+      "total_score": 34,
+      "average_score": 6.8,
+      "risk_level": "HIGH"
+    }
+  ]
+}

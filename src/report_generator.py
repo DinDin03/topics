@@ -378,3 +378,23 @@ class HTMLReportBuilder:
         except Exception as e:
             logger.error(f"Error building HTML report: {e}")
             return "<p>Error generating report</p>"
+
+class ReportGenerator:
+    """
+    Main report generation engine. Wraps HTMLReportBuilder and provides a simple interface.
+    """
+    def __init__(self, output_format: str = "html"):
+        self.output_format = output_format
+        self.html_builder = HTMLReportBuilder()
+        # In the future, add PDF/Markdown support here
+
+    def generate_report(self, config: ReportConfiguration, data: Dict[str, Any]) -> str:
+        if self.output_format == "html":
+            return self.html_builder.build_report(config, data)
+        else:
+            raise NotImplementedError(f"Output format {self.output_format} not supported yet.")
+
+    def save_report(self, config: ReportConfiguration, data: Dict[str, Any], output_path: str) -> None:
+        report_content = self.generate_report(config, data)
+        with open(output_path, "w", encoding="utf-8") as f:
+            f.write(report_content)

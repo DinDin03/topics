@@ -1,0 +1,724 @@
+{
+  "analysis_timestamp": "2025-06-19T13:57:27.489129",
+  "system_summary": {
+    "total_components": 7,
+    "total_data_flows": 31,
+    "total_threats": 17
+  },
+  "stride_breakdown": {
+    "SPOOFING": 5,
+    "TAMPERING": 4,
+    "REPUDIATION": 0,
+    "INFORMATION_DISCLOSURE": 3,
+    "DENIAL_OF_SERVICE": 4,
+    "ELEVATION_OF_PRIVILEGE": 1
+  },
+  "risk_distribution": {
+    "LOW": 0,
+    "MEDIUM": 8,
+    "HIGH": 9,
+    "CRITICAL": 0
+  },
+  "component_summary": {
+    "inverter_001": {
+      "name": "Primary Solar Inverter SG5KTL",
+      "type": "SOLAR_INVERTER",
+      "threat_count": 4,
+      "average_risk_score": 10.0,
+      "highest_risk_threat": "Inverter Identity Spoofing"
+    },
+    "inverter_002": {
+      "name": "Secondary Solar Inverter SG3KTL",
+      "type": "SOLAR_INVERTER",
+      "threat_count": 4,
+      "average_risk_score": 10.0,
+      "highest_risk_threat": "Inverter Identity Spoofing"
+    },
+    "gateway_001": {
+      "name": "IoT Communication Gateway",
+      "type": "COMMUNICATION_GATEWAY",
+      "threat_count": 2,
+      "average_risk_score": 12.0,
+      "highest_risk_threat": "Gateway Impersonation"
+    },
+    "api_001": {
+      "name": "AEMO VPP API Endpoint",
+      "type": "API_ENDPOINT",
+      "threat_count": 3,
+      "average_risk_score": 10.0,
+      "highest_risk_threat": "API Authentication Bypass"
+    },
+    "monitoring_001": {
+      "name": "Solar Monitoring Platform",
+      "type": "SOLAR_INVERTER",
+      "threat_count": 4,
+      "average_risk_score": 10.0,
+      "highest_risk_threat": "Inverter Identity Spoofing"
+    },
+    "web_interface_001": {
+      "name": "Inverter Management Web Interface",
+      "type": "WEB_INTERFACE",
+      "threat_count": 0,
+      "average_risk_score": 0,
+      "highest_risk_threat": null
+    },
+    "database_001": {
+      "name": "Local Configuration Database",
+      "type": "DATABASE",
+      "threat_count": 0,
+      "average_risk_score": 0,
+      "highest_risk_threat": null
+    }
+  },
+  "top_threats": [
+    {
+      "id": "inverter_001_SPOOFING_1",
+      "title": "Inverter Identity Spoofing",
+      "description": "Attacker impersonates legitimate inverter to inject malicious commands",
+      "stride_category": "SPOOFING",
+      "affected_component": "inverter_001",
+      "attack_vector": "Network protocol manipulation",
+      "impact_description": "Unauthorized control of power generation",
+      "likelihood": 1,
+      "impact": 4,
+      "risk_score": 12,
+      "mitigation_strategies": [
+        "Implement device certificates",
+        "Use cryptographic device authentication",
+        "Monitor for unusual device behavior"
+      ],
+      "references": []
+    },
+    {
+      "id": "inverter_001_DENIAL_OF_SERVICE_3",
+      "title": "Inverter Service Disruption",
+      "description": "Flooding inverter with requests to cause service disruption",
+      "stride_category": "DENIAL_OF_SERVICE",
+      "affected_component": "inverter_001",
+      "attack_vector": "Network flooding attacks",
+      "impact_description": "Loss of power generation capacity",
+      "likelihood": 4,
+      "impact": 3,
+      "risk_score": 12,
+      "mitigation_strategies": [
+        "Implement rate limiting",
+        "Network traffic filtering",
+        "DDoS protection mechanisms"
+      ],
+      "references": []
+    },
+    {
+      "id": "inverter_002_SPOOFING_1",
+      "title": "Inverter Identity Spoofing",
+      "description": "Attacker impersonates legitimate inverter to inject malicious commands",
+      "stride_category": "SPOOFING",
+      "affected_component": "inverter_002",
+      "attack_vector": "Network protocol manipulation",
+      "impact_description": "Unauthorized control of power generation",
+      "likelihood": 3,
+      "impact": 4,
+      "risk_score": 12,
+      "mitigation_strategies": [
+        "Implement device certificates",
+        "Use cryptographic device authentication",
+        "Monitor for unusual device behavior"
+      ],
+      "references": []
+    },
+    {
+      "id": "inverter_002_DENIAL_OF_SERVICE_3",
+      "title": "Inverter Service Disruption",
+      "description": "Flooding inverter with requests to cause service disruption",
+      "stride_category": "DENIAL_OF_SERVICE",
+      "affected_component": "inverter_002",
+      "attack_vector": "Network flooding attacks",
+      "impact_description": "Loss of power generation capacity",
+      "likelihood": 4,
+      "impact": 3,
+      "risk_score": 12,
+      "mitigation_strategies": [
+        "Implement rate limiting",
+        "Network traffic filtering",
+        "DDoS protection mechanisms"
+      ],
+      "references": []
+    },
+    {
+      "id": "gateway_001_SPOOFING_1",
+      "title": "Gateway Impersonation",
+      "description": "Attacker impersonates communication gateway",
+      "stride_category": "SPOOFING",
+      "affected_component": "gateway_001",
+      "attack_vector": "Network protocol vulnerabilities",
+      "impact_description": "Unauthorized network access",
+      "likelihood": 1,
+      "impact": 4,
+      "risk_score": 12,
+      "mitigation_strategies": [
+        "Device certificates and PKI",
+        "Network access control",
+        "Regular device authentication"
+      ],
+      "references": []
+    },
+    {
+      "id": "gateway_001_DENIAL_OF_SERVICE_2",
+      "title": "Gateway Resource Exhaustion",
+      "description": "Overwhelming gateway with traffic to cause failure",
+      "stride_category": "DENIAL_OF_SERVICE",
+      "affected_component": "gateway_001",
+      "attack_vector": "Resource exhaustion attacks",
+      "impact_description": "Communication network disruption",
+      "likelihood": 3,
+      "impact": 4,
+      "risk_score": 12,
+      "mitigation_strategies": [
+        "Implement quality of service controls",
+        "Resource monitoring and alerting",
+        "Traffic shaping and prioritization"
+      ],
+      "references": []
+    },
+    {
+      "id": "api_001_SPOOFING_1",
+      "title": "API Authentication Bypass",
+      "description": "Attacker bypasses API authentication mechanisms",
+      "stride_category": "SPOOFING",
+      "affected_component": "api_001",
+      "attack_vector": "Weak authentication implementation",
+      "impact_description": "Unauthorized API access",
+      "likelihood": 1,
+      "impact": 4,
+      "risk_score": 12,
+      "mitigation_strategies": [
+        "Implement strong authentication (OAuth 2.0, JWT)",
+        "Multi-factor authentication",
+        "Regular security audits"
+      ],
+      "references": []
+    },
+    {
+      "id": "monitoring_001_SPOOFING_1",
+      "title": "Inverter Identity Spoofing",
+      "description": "Attacker impersonates legitimate inverter to inject malicious commands",
+      "stride_category": "SPOOFING",
+      "affected_component": "monitoring_001",
+      "attack_vector": "Network protocol manipulation",
+      "impact_description": "Unauthorized control of power generation",
+      "likelihood": 1,
+      "impact": 4,
+      "risk_score": 12,
+      "mitigation_strategies": [
+        "Implement device certificates",
+        "Use cryptographic device authentication",
+        "Monitor for unusual device behavior"
+      ],
+      "references": []
+    },
+    {
+      "id": "monitoring_001_DENIAL_OF_SERVICE_3",
+      "title": "Inverter Service Disruption",
+      "description": "Flooding inverter with requests to cause service disruption",
+      "stride_category": "DENIAL_OF_SERVICE",
+      "affected_component": "monitoring_001",
+      "attack_vector": "Network flooding attacks",
+      "impact_description": "Loss of power generation capacity",
+      "likelihood": 4,
+      "impact": 3,
+      "risk_score": 12,
+      "mitigation_strategies": [
+        "Implement rate limiting",
+        "Network traffic filtering",
+        "DDoS protection mechanisms"
+      ],
+      "references": []
+    },
+    {
+      "id": "inverter_001_TAMPERING_2",
+      "title": "Firmware Tampering",
+      "description": "Malicious modification of inverter firmware",
+      "stride_category": "TAMPERING",
+      "affected_component": "inverter_001",
+      "attack_vector": "Insecure firmware update mechanism",
+      "impact_description": "Complete device compromise",
+      "likelihood": 2,
+      "impact": 5,
+      "risk_score": 10,
+      "mitigation_strategies": [
+        "Implement code signing for firmware",
+        "Secure boot process",
+        "Firmware integrity checks"
+      ],
+      "references": []
+    }
+  ],
+  "all_threats": [
+    {
+      "id": "inverter_001_SPOOFING_1",
+      "title": "Inverter Identity Spoofing",
+      "description": "Attacker impersonates legitimate inverter to inject malicious commands",
+      "stride_category": "SPOOFING",
+      "affected_component": "inverter_001",
+      "attack_vector": "Network protocol manipulation",
+      "impact_description": "Unauthorized control of power generation",
+      "likelihood": 1,
+      "impact": 4,
+      "risk_score": 12,
+      "mitigation_strategies": [
+        "Implement device certificates",
+        "Use cryptographic device authentication",
+        "Monitor for unusual device behavior"
+      ],
+      "references": []
+    },
+    {
+      "id": "inverter_001_TAMPERING_2",
+      "title": "Firmware Tampering",
+      "description": "Malicious modification of inverter firmware",
+      "stride_category": "TAMPERING",
+      "affected_component": "inverter_001",
+      "attack_vector": "Insecure firmware update mechanism",
+      "impact_description": "Complete device compromise",
+      "likelihood": 2,
+      "impact": 5,
+      "risk_score": 10,
+      "mitigation_strategies": [
+        "Implement code signing for firmware",
+        "Secure boot process",
+        "Firmware integrity checks"
+      ],
+      "references": []
+    },
+    {
+      "id": "inverter_001_DENIAL_OF_SERVICE_3",
+      "title": "Inverter Service Disruption",
+      "description": "Flooding inverter with requests to cause service disruption",
+      "stride_category": "DENIAL_OF_SERVICE",
+      "affected_component": "inverter_001",
+      "attack_vector": "Network flooding attacks",
+      "impact_description": "Loss of power generation capacity",
+      "likelihood": 4,
+      "impact": 3,
+      "risk_score": 12,
+      "mitigation_strategies": [
+        "Implement rate limiting",
+        "Network traffic filtering",
+        "DDoS protection mechanisms"
+      ],
+      "references": []
+    },
+    {
+      "id": "inverter_001_INFORMATION_DISCLOSURE_4",
+      "title": "Power Generation Data Exposure",
+      "description": "Unauthorized access to sensitive power generation data",
+      "stride_category": "INFORMATION_DISCLOSURE",
+      "affected_component": "inverter_001",
+      "attack_vector": "Insecure data transmission",
+      "impact_description": "Competitive intelligence theft",
+      "likelihood": 3,
+      "impact": 2,
+      "risk_score": 6,
+      "mitigation_strategies": [
+        "Encrypt all data transmissions",
+        "Implement access controls",
+        "Data classification and handling procedures"
+      ],
+      "references": []
+    },
+    {
+      "id": "inverter_002_SPOOFING_1",
+      "title": "Inverter Identity Spoofing",
+      "description": "Attacker impersonates legitimate inverter to inject malicious commands",
+      "stride_category": "SPOOFING",
+      "affected_component": "inverter_002",
+      "attack_vector": "Network protocol manipulation",
+      "impact_description": "Unauthorized control of power generation",
+      "likelihood": 3,
+      "impact": 4,
+      "risk_score": 12,
+      "mitigation_strategies": [
+        "Implement device certificates",
+        "Use cryptographic device authentication",
+        "Monitor for unusual device behavior"
+      ],
+      "references": []
+    },
+    {
+      "id": "inverter_002_TAMPERING_2",
+      "title": "Firmware Tampering",
+      "description": "Malicious modification of inverter firmware",
+      "stride_category": "TAMPERING",
+      "affected_component": "inverter_002",
+      "attack_vector": "Insecure firmware update mechanism",
+      "impact_description": "Complete device compromise",
+      "likelihood": 2,
+      "impact": 5,
+      "risk_score": 10,
+      "mitigation_strategies": [
+        "Implement code signing for firmware",
+        "Secure boot process",
+        "Firmware integrity checks"
+      ],
+      "references": []
+    },
+    {
+      "id": "inverter_002_DENIAL_OF_SERVICE_3",
+      "title": "Inverter Service Disruption",
+      "description": "Flooding inverter with requests to cause service disruption",
+      "stride_category": "DENIAL_OF_SERVICE",
+      "affected_component": "inverter_002",
+      "attack_vector": "Network flooding attacks",
+      "impact_description": "Loss of power generation capacity",
+      "likelihood": 4,
+      "impact": 3,
+      "risk_score": 12,
+      "mitigation_strategies": [
+        "Implement rate limiting",
+        "Network traffic filtering",
+        "DDoS protection mechanisms"
+      ],
+      "references": []
+    },
+    {
+      "id": "inverter_002_INFORMATION_DISCLOSURE_4",
+      "title": "Power Generation Data Exposure",
+      "description": "Unauthorized access to sensitive power generation data",
+      "stride_category": "INFORMATION_DISCLOSURE",
+      "affected_component": "inverter_002",
+      "attack_vector": "Insecure data transmission",
+      "impact_description": "Competitive intelligence theft",
+      "likelihood": 3,
+      "impact": 2,
+      "risk_score": 6,
+      "mitigation_strategies": [
+        "Encrypt all data transmissions",
+        "Implement access controls",
+        "Data classification and handling procedures"
+      ],
+      "references": []
+    },
+    {
+      "id": "gateway_001_SPOOFING_1",
+      "title": "Gateway Impersonation",
+      "description": "Attacker impersonates communication gateway",
+      "stride_category": "SPOOFING",
+      "affected_component": "gateway_001",
+      "attack_vector": "Network protocol vulnerabilities",
+      "impact_description": "Unauthorized network access",
+      "likelihood": 1,
+      "impact": 4,
+      "risk_score": 12,
+      "mitigation_strategies": [
+        "Device certificates and PKI",
+        "Network access control",
+        "Regular device authentication"
+      ],
+      "references": []
+    },
+    {
+      "id": "gateway_001_DENIAL_OF_SERVICE_2",
+      "title": "Gateway Resource Exhaustion",
+      "description": "Overwhelming gateway with traffic to cause failure",
+      "stride_category": "DENIAL_OF_SERVICE",
+      "affected_component": "gateway_001",
+      "attack_vector": "Resource exhaustion attacks",
+      "impact_description": "Communication network disruption",
+      "likelihood": 3,
+      "impact": 4,
+      "risk_score": 12,
+      "mitigation_strategies": [
+        "Implement quality of service controls",
+        "Resource monitoring and alerting",
+        "Traffic shaping and prioritization"
+      ],
+      "references": []
+    },
+    {
+      "id": "api_001_SPOOFING_1",
+      "title": "API Authentication Bypass",
+      "description": "Attacker bypasses API authentication mechanisms",
+      "stride_category": "SPOOFING",
+      "affected_component": "api_001",
+      "attack_vector": "Weak authentication implementation",
+      "impact_description": "Unauthorized API access",
+      "likelihood": 1,
+      "impact": 4,
+      "risk_score": 12,
+      "mitigation_strategies": [
+        "Implement strong authentication (OAuth 2.0, JWT)",
+        "Multi-factor authentication",
+        "Regular security audits"
+      ],
+      "references": []
+    },
+    {
+      "id": "api_001_TAMPERING_2",
+      "title": "API Request Manipulation",
+      "description": "Modification of API requests to perform unauthorized actions",
+      "stride_category": "TAMPERING",
+      "affected_component": "api_001",
+      "attack_vector": "Man-in-the-middle attacks",
+      "impact_description": "Unauthorized system control",
+      "likelihood": 1,
+      "impact": 4,
+      "risk_score": 8,
+      "mitigation_strategies": [
+        "Use HTTPS for all API communications",
+        "Implement request signing",
+        "Input validation and sanitization"
+      ],
+      "references": []
+    },
+    {
+      "id": "api_001_ELEVATION_OF_PRIVILEGE_3",
+      "title": "API Privilege Escalation",
+      "description": "Attacker gains higher privileges than intended",
+      "stride_category": "ELEVATION_OF_PRIVILEGE",
+      "affected_component": "api_001",
+      "attack_vector": "Authorization bypass vulnerabilities",
+      "impact_description": "Administrative access to system",
+      "likelihood": 1,
+      "impact": 5,
+      "risk_score": 10,
+      "mitigation_strategies": [
+        "Implement proper authorization checks",
+        "Principle of least privilege",
+        "Regular access reviews"
+      ],
+      "references": []
+    },
+    {
+      "id": "monitoring_001_SPOOFING_1",
+      "title": "Inverter Identity Spoofing",
+      "description": "Attacker impersonates legitimate inverter to inject malicious commands",
+      "stride_category": "SPOOFING",
+      "affected_component": "monitoring_001",
+      "attack_vector": "Network protocol manipulation",
+      "impact_description": "Unauthorized control of power generation",
+      "likelihood": 1,
+      "impact": 4,
+      "risk_score": 12,
+      "mitigation_strategies": [
+        "Implement device certificates",
+        "Use cryptographic device authentication",
+        "Monitor for unusual device behavior"
+      ],
+      "references": []
+    },
+    {
+      "id": "monitoring_001_TAMPERING_2",
+      "title": "Firmware Tampering",
+      "description": "Malicious modification of inverter firmware",
+      "stride_category": "TAMPERING",
+      "affected_component": "monitoring_001",
+      "attack_vector": "Insecure firmware update mechanism",
+      "impact_description": "Complete device compromise",
+      "likelihood": 1,
+      "impact": 5,
+      "risk_score": 10,
+      "mitigation_strategies": [
+        "Implement code signing for firmware",
+        "Secure boot process",
+        "Firmware integrity checks"
+      ],
+      "references": []
+    },
+    {
+      "id": "monitoring_001_DENIAL_OF_SERVICE_3",
+      "title": "Inverter Service Disruption",
+      "description": "Flooding inverter with requests to cause service disruption",
+      "stride_category": "DENIAL_OF_SERVICE",
+      "affected_component": "monitoring_001",
+      "attack_vector": "Network flooding attacks",
+      "impact_description": "Loss of power generation capacity",
+      "likelihood": 4,
+      "impact": 3,
+      "risk_score": 12,
+      "mitigation_strategies": [
+        "Implement rate limiting",
+        "Network traffic filtering",
+        "DDoS protection mechanisms"
+      ],
+      "references": []
+    },
+    {
+      "id": "monitoring_001_INFORMATION_DISCLOSURE_4",
+      "title": "Power Generation Data Exposure",
+      "description": "Unauthorized access to sensitive power generation data",
+      "stride_category": "INFORMATION_DISCLOSURE",
+      "affected_component": "monitoring_001",
+      "attack_vector": "Insecure data transmission",
+      "impact_description": "Competitive intelligence theft",
+      "likelihood": 1,
+      "impact": 2,
+      "risk_score": 6,
+      "mitigation_strategies": [
+        "Encrypt all data transmissions",
+        "Implement access controls",
+        "Data classification and handling procedures"
+      ],
+      "references": []
+    }
+  ],
+  "mitigation_recommendations": [
+    {
+      "mitigation": "Implement device certificates",
+      "threat_count": 3,
+      "average_risk_reduction": 12.0,
+      "impact_score": 36.0,
+      "affected_threats": [
+        "inverter_001_SPOOFING_1",
+        "inverter_002_SPOOFING_1",
+        "monitoring_001_SPOOFING_1"
+      ]
+    },
+    {
+      "mitigation": "Use cryptographic device authentication",
+      "threat_count": 3,
+      "average_risk_reduction": 12.0,
+      "impact_score": 36.0,
+      "affected_threats": [
+        "inverter_001_SPOOFING_1",
+        "inverter_002_SPOOFING_1",
+        "monitoring_001_SPOOFING_1"
+      ]
+    },
+    {
+      "mitigation": "Monitor for unusual device behavior",
+      "threat_count": 3,
+      "average_risk_reduction": 12.0,
+      "impact_score": 36.0,
+      "affected_threats": [
+        "inverter_001_SPOOFING_1",
+        "inverter_002_SPOOFING_1",
+        "monitoring_001_SPOOFING_1"
+      ]
+    },
+    {
+      "mitigation": "Implement rate limiting",
+      "threat_count": 3,
+      "average_risk_reduction": 12.0,
+      "impact_score": 36.0,
+      "affected_threats": [
+        "inverter_001_DENIAL_OF_SERVICE_3",
+        "inverter_002_DENIAL_OF_SERVICE_3",
+        "monitoring_001_DENIAL_OF_SERVICE_3"
+      ]
+    },
+    {
+      "mitigation": "Network traffic filtering",
+      "threat_count": 3,
+      "average_risk_reduction": 12.0,
+      "impact_score": 36.0,
+      "affected_threats": [
+        "inverter_001_DENIAL_OF_SERVICE_3",
+        "inverter_002_DENIAL_OF_SERVICE_3",
+        "monitoring_001_DENIAL_OF_SERVICE_3"
+      ]
+    },
+    {
+      "mitigation": "DDoS protection mechanisms",
+      "threat_count": 3,
+      "average_risk_reduction": 12.0,
+      "impact_score": 36.0,
+      "affected_threats": [
+        "inverter_001_DENIAL_OF_SERVICE_3",
+        "inverter_002_DENIAL_OF_SERVICE_3",
+        "monitoring_001_DENIAL_OF_SERVICE_3"
+      ]
+    },
+    {
+      "mitigation": "Implement code signing for firmware",
+      "threat_count": 3,
+      "average_risk_reduction": 10.0,
+      "impact_score": 30.0,
+      "affected_threats": [
+        "inverter_001_TAMPERING_2",
+        "inverter_002_TAMPERING_2",
+        "monitoring_001_TAMPERING_2"
+      ]
+    },
+    {
+      "mitigation": "Secure boot process",
+      "threat_count": 3,
+      "average_risk_reduction": 10.0,
+      "impact_score": 30.0,
+      "affected_threats": [
+        "inverter_001_TAMPERING_2",
+        "inverter_002_TAMPERING_2",
+        "monitoring_001_TAMPERING_2"
+      ]
+    },
+    {
+      "mitigation": "Firmware integrity checks",
+      "threat_count": 3,
+      "average_risk_reduction": 10.0,
+      "impact_score": 30.0,
+      "affected_threats": [
+        "inverter_001_TAMPERING_2",
+        "inverter_002_TAMPERING_2",
+        "monitoring_001_TAMPERING_2"
+      ]
+    },
+    {
+      "mitigation": "Encrypt all data transmissions",
+      "threat_count": 3,
+      "average_risk_reduction": 6.0,
+      "impact_score": 18.0,
+      "affected_threats": [
+        "inverter_001_INFORMATION_DISCLOSURE_4",
+        "inverter_002_INFORMATION_DISCLOSURE_4",
+        "monitoring_001_INFORMATION_DISCLOSURE_4"
+      ]
+    },
+    {
+      "mitigation": "Implement access controls",
+      "threat_count": 3,
+      "average_risk_reduction": 6.0,
+      "impact_score": 18.0,
+      "affected_threats": [
+        "inverter_001_INFORMATION_DISCLOSURE_4",
+        "inverter_002_INFORMATION_DISCLOSURE_4",
+        "monitoring_001_INFORMATION_DISCLOSURE_4"
+      ]
+    },
+    {
+      "mitigation": "Data classification and handling procedures",
+      "threat_count": 3,
+      "average_risk_reduction": 6.0,
+      "impact_score": 18.0,
+      "affected_threats": [
+        "inverter_001_INFORMATION_DISCLOSURE_4",
+        "inverter_002_INFORMATION_DISCLOSURE_4",
+        "monitoring_001_INFORMATION_DISCLOSURE_4"
+      ]
+    },
+    {
+      "mitigation": "Device certificates and PKI",
+      "threat_count": 1,
+      "average_risk_reduction": 12.0,
+      "impact_score": 12.0,
+      "affected_threats": [
+        "gateway_001_SPOOFING_1"
+      ]
+    },
+    {
+      "mitigation": "Network access control",
+      "threat_count": 1,
+      "average_risk_reduction": 12.0,
+      "impact_score": 12.0,
+      "affected_threats": [
+        "gateway_001_SPOOFING_1"
+      ]
+    },
+    {
+      "mitigation": "Regular device authentication",
+      "threat_count": 1,
+      "average_risk_reduction": 12.0,
+      "impact_score": 12.0,
+      "affected_threats": [
+        "gateway_001_SPOOFING_1"
+      ]
+    }
+  ]
+}

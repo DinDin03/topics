@@ -1,0 +1,58 @@
+[
+  {
+    "cve_id": "CVE-2023-1001",
+    "title": "Sungrow WiNet-S Hardcoded MQTT Credentials",
+    "description": "Hardcoded MQTT credentials found in Sungrow WiNet-S communication module firmware",
+    "severity": "HIGH",
+    "cvss_score": 8.1,
+    "vulnerability_type": "HARDCODED_SECRETS",
+    "affected_components": [
+      "WiNet-S Communication Module"
+    ],
+    "affected_protocols": [
+      "MQTT"
+    ],
+    "manufacturer": "sungrow",
+    "model": "WiNet-S",
+    "firmware_versions": [
+      "1.0.0",
+      "1.0.1",
+      "1.0.2"
+    ],
+    "discovery_date": "2025-03-17T13:57:00.714328",
+    "publication_date": "2024-11-05T13:57:00.714328",
+    "mitigation_available": true,
+    "mitigation_description": "Update firmware to latest version and change default credentials",
+    "exploit_available": false,
+    "references": []
+  },
+  {
+    "cve_id": "CVE-2023-1002",
+    "title": "Default Admin Credentials in Solar Inverter Web Interface",
+    "description": "Default admin/admin credentials allow unauthorized access to inverter configuration",
+    "severity": "CRITICAL",
+    "cvss_score": 9.8,
+    "vulnerability_type": "DEFAULT_CREDENTIALS",
+    "affected_components": [
+      "Web Management Interface"
+    ],
+    "affected_protocols": [
+      "HTTP",
+      "HTTPS"
+    ],
+    "manufacturer": "generic",
+    "model": "Multiple Models",
+    "firmware_versions": [
+      "1.0.0",
+      "1.0.1",
+      "1.0.2",
+      "1.0.3"
+    ],
+    "discovery_date": "2024-10-20T13:57:00.714328",
+    "publication_date": "2025-02-21T13:57:00.714328",
+    "mitigation_available": true,
+    "mitigation_description": "Update firmware to latest version and change default credentials",
+    "exploit_available": false,
+    "references": []
+  }
+]

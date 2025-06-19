@@ -177,7 +177,8 @@
         "remote_control",
         "protocol_translation",
         "cloud_connectivity"
-      ]
+      ],
+      "capacity_kw": 0.0
     },
     {
       "id": "api_001",
@@ -224,7 +225,8 @@
         "type": "oauth2",
         "token_expiry": "3600",
         "refresh_token_required": true
-      }
+      },
+      "capacity_kw": 0.0
     },
     {
       "id": "monitoring_001",
@@ -271,7 +273,8 @@
         "performance_data": "5_years",
         "alert_logs": "2_years",
         "user_activity": "1_year"
-      }
+      },
+      "capacity_kw": 0.0
     },
     {
       "id": "web_interface_001",
@@ -318,7 +321,8 @@
         "Default credentials not changed",
         "No multi-factor authentication",
         "Session management vulnerabilities"
-      ]
+      ],
+      "capacity_kw": 0.0
     },
     {
       "id": "database_001",
@@ -358,7 +362,8 @@
         "Weak file permissions",
         "No database-level authentication",
         "Backup files unencrypted"
-      ]
+      ],
+      "capacity_kw": 0.0
     }
   ],
   "data_flows": [

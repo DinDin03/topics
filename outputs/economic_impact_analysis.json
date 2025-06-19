@@ -1,0 +1,625 @@
+{
+  "analysis_timestamp": "2025-06-19T13:59:39.890257",
+  "system_summary": {
+    "total_capacity_kw": 8.0,
+    "location": "Adelaide, South Australia",
+    "analysis_scope": "Cybersecurity economic impact assessment"
+  },
+  "scenario_analysis": {
+    "SINGLE_INVERTER_COMPROMISE": {
+      "scenario": "SINGLE_INVERTER_COMPROMISE",
+      "duration_hours": 13.0,
+      "affected_capacity_mw": 0.0048,
+      "direct_costs": {
+        "lost_generation_revenue": 1.4976,
+        "emergency_response_cost": 2000,
+        "equipment_replacement_cost": 0,
+        "forensic_investigation_cost": 15000,
+        "legal_consultation_cost": 8000
+      },
+      "indirect_costs": {
+        "reputation_damage": 47.99999999999999,
+        "regulatory_penalties": 5000,
+        "insurance_premium_increase": 9.6,
+        "productivity_losses": 2600.0,
+        "customer_confidence_impact": 23.999999999999996
+      },
+      "spot_price_impact": {
+        "total_market_impact": 0.9361306364435305,
+        "price_increase": 0.0020935327488860725,
+        "additional_generation_cost": 0.00013063644353049093
+      },
+      "sector_impacts": {
+        "RESIDENTIAL": 664.0351957563117,
+        "COMMERCIAL": 2714.652793634468,
+        "INDUSTRIAL": 13346.310391512623,
+        "GRID_OPERATOR": 6535.0879893907795,
+        "ENERGY_RETAILER": 3931.497587268935
+      },
+      "recovery_costs": {
+        "technical_recovery": 5000.0,
+        "security_improvements": 960.0,
+        "staff_training": 10000,
+        "monitoring_upgrades": 25000,
+        "consultant_fees": 20000
+      },
+      "total_economic_impact": 93644.03595480564,
+      "impact_timestamp": "2025-06-19T13:59:39.881059"
+    },
+    "MULTIPLE_INVERTER_ATTACK": {
+      "scenario": "MULTIPLE_INVERTER_ATTACK",
+      "duration_hours": 39.0,
+      "affected_capacity_mw": 0.0064,
+      "direct_costs": {
+        "lost_generation_revenue": 5.9904,
+        "emergency_response_cost": 4000,
+        "equipment_replacement_cost": 0,
+        "forensic_investigation_cost": 15000,
+        "legal_consultation_cost": 8000
+      },
+      "indirect_costs": {
+        "reputation_damage": 64.0,
+        "regulatory_penalties": 5000,
+        "insurance_premium_increase": 12.8,
+        "productivity_losses": 7800.0,
+        "customer_confidence_impact": 32.0
+      },
+      "spot_price_impact": {
+        "total_market_impact": 3.7446967276988343,
+        "price_increase": 0.00279137699853321,
+        "additional_generation_cost": 0.0006967276988338893
+      },
+      "sector_impacts": {
+        "RESIDENTIAL": 2006.140783025247,
+        "COMMERCIAL": 8258.611174537871,
+        "INDUSTRIAL": 40385.24156605049,
+        "GRID_OPERATOR": 19640.351957563118,
+        "ENERGY_RETAILER": 11825.99034907574
+      },
+      "recovery_costs": {
+        "technical_recovery": 20000.0,
+        "security_improvements": 1280.0,
+        "staff_training": 10000,
+        "monitoring_upgrades": 25000,
+        "consultant_fees": 20000
+      },
+      "total_economic_impact": 116198.5385848324,
+      "impact_timestamp": "2025-06-19T13:59:39.881092"
+    },
+    "GATEWAY_COMPROMISE": {
+      "scenario": "GATEWAY_COMPROMISE",
+      "duration_hours": 26.0,
+      "affected_capacity_mw": 0.008,
+      "direct_costs": {
+        "lost_generation_revenue": 4.992,
+        "emergency_response_cost": 3000,
+        "equipment_replacement_cost": 0,
+        "forensic_investigation_cost": 15000,
+        "legal_consultation_cost": 8000
+      },
+      "indirect_costs": {
+        "reputation_damage": 80.0,
+        "regulatory_penalties": 5000,
+        "insurance_premium_increase": 16.0,
+        "productivity_losses": 5200.0,
+        "customer_confidence_impact": 40.0
+      },
+      "spot_price_impact": {
+        "total_market_impact": 3.12072575801961,
+        "price_increase": 0.0034892212481250073,
+        "additional_generation_cost": 0.0007257580196100015
+      },
+      "sector_impacts": {
+        "RESIDENTIAL": 1346.7839858543725,
+        "COMMERCIAL": 5582.175978781559,
+        "INDUSTRIAL": 27154.367971708743,
+        "GRID_OPERATOR": 13116.959964635931,
+        "ENERGY_RETAILER": 7904.9919575631175
+      },
+      "recovery_costs": {
+        "technical_recovery": 10000.0,
+        "security_improvements": 1600.0,
+        "staff_training": 10000,
+        "monitoring_upgrades": 25000,
+        "consultant_fees": 20000
+      },
+      "total_economic_impact": 102944.1169407373,
+      "impact_timestamp": "2025-06-19T13:59:39.881116"
+    },
+    "API_ENDPOINT_ATTACK": {
+      "scenario": "API_ENDPOINT_ATTACK",
+      "duration_hours": 6.5,
+      "affected_capacity_mw": 0.0024,
+      "direct_costs": {
+        "lost_generation_revenue": 0.3744,
+        "emergency_response_cost": 1000,
+        "equipment_replacement_cost": 0,
+        "forensic_investigation_cost": 15000,
+        "legal_consultation_cost": 8000
+      },
+      "indirect_costs": {
+        "reputation_damage": 23.999999999999996,
+        "regulatory_penalties": 5000,
+        "insurance_premium_increase": 4.8,
+        "productivity_losses": 1300.0,
+        "customer_confidence_impact": 11.999999999999998
+      },
+      "spot_price_impact": {
+        "total_market_impact": 0.2340163295554413,
+        "price_increase": 0.0010467663744430362,
+        "additional_generation_cost": 1.6329555441311366e-05
+      },
+      "sector_impacts": {
+        "RESIDENTIAL": 328.50879893907796,
+        "COMMERCIAL": 1328.6631984086168,
+        "INDUSTRIAL": 6586.577597878156,
+        "GRID_OPERATOR": 3258.7719973476947,
+        "ENERGY_RETAILER": 1957.874396817234
+      },
+      "recovery_costs": {
+        "technical_recovery": 5000.0,
+        "security_improvements": 480.0,
+        "staff_training": 10000,
+        "monitoring_upgrades": 25000,
+        "consultant_fees": 20000
+      },
+      "total_economic_impact": 90821.40947942549,
+      "impact_timestamp": "2025-06-19T13:59:39.881137"
+    },
+    "COORDINATED_GRID_ATTACK": {
+      "scenario": "COORDINATED_GRID_ATTACK",
+      "duration_hours": 90.0,
+      "affected_capacity_mw": 0.008,
+      "direct_costs": {
+        "lost_generation_revenue": 17.279999999999998,
+        "emergency_response_cost": 6000,
+        "equipment_replacement_cost": 12000.0,
+        "forensic_investigation_cost": 15000,
+        "legal_consultation_cost": 8000
+      },
+      "indirect_costs": {
+        "reputation_damage": 80.0,
+        "regulatory_penalties": 50000,
+        "insurance_premium_increase": 16.0,
+        "productivity_losses": 18000.0,
+        "customer_confidence_impact": 40.0
+      },
+      "spot_price_impact": {
+        "total_market_impact": 10.802512239298649,
+        "price_increase": 0.0034892212481250073,
+        "additional_generation_cost": 0.002512239298650005
+      },
+      "sector_impacts": {
+        "RESIDENTIAL": 4661.944566418982,
+        "COMMERCIAL": 19322.916849628473,
+        "INDUSTRIAL": 93995.88913283797,
+        "GRID_OPERATOR": 45404.86141604745,
+        "ENERGY_RETAILER": 27363.433699256944
+      },
+      "recovery_costs": {
+        "technical_recovery": 40000.0,
+        "security_improvements": 1600.0,
+        "staff_training": 10000,
+        "monitoring_upgrades": 25000,
+        "consultant_fees": 20000
+      },
+      "total_economic_impact": 205764.08851369983,
+      "impact_timestamp": "2025-06-19T13:59:39.881158"
+    },
+    "FIRMWARE_INJECTION": {
+      "scenario": "FIRMWARE_INJECTION",
+      "duration_hours": 132.0,
+      "affected_capacity_mw": 0.0072,
+      "direct_costs": {
+        "lost_generation_revenue": 22.8096,
+        "emergency_response_cost": 24000,
+        "equipment_replacement_cost": 10800.0,
+        "forensic_investigation_cost": 15000,
+        "legal_consultation_cost": 8000
+      },
+      "indirect_costs": {
+        "reputation_damage": 72.0,
+        "regulatory_penalties": 50000,
+        "insurance_premium_increase": 14.4,
+        "productivity_losses": 26400.0,
+        "customer_confidence_impact": 36.0
+      },
+      "spot_price_impact": {
+        "total_market_impact": 14.258984540286813,
+        "price_increase": 0.0031402991233291087,
+        "additional_generation_cost": 0.002984540286811985
+      },
+      "sector_impacts": {
+        "RESIDENTIAL": 6813.766827673056,
+        "COMMERCIAL": 28146.250241509584,
+        "INDUSTRIAL": 137274.57365534612,
+        "GRID_OPERATOR": 66534.41706918264,
+        "ENERGY_RETAILER": 40079.732483019165
+      },
+      "recovery_costs": {
+        "technical_recovery": 40000.0,
+        "security_improvements": 1440.0,
+        "staff_training": 10000,
+        "monitoring_upgrades": 25000,
+        "consultant_fees": 20000
+      },
+      "total_economic_impact": 230799.4747093797,
+      "impact_timestamp": "2025-06-19T13:59:39.881178"
+    },
+    "DENIAL_OF_SERVICE": {
+      "scenario": "DENIAL_OF_SERVICE",
+      "duration_hours": 4.5,
+      "affected_capacity_mw": 0.0032,
+      "direct_costs": {
+        "lost_generation_revenue": 0.3456,
+        "emergency_response_cost": 500,
+        "equipment_replacement_cost": 0,
+        "forensic_investigation_cost": 15000,
+        "legal_consultation_cost": 8000
+      },
+      "indirect_costs": {
+        "reputation_damage": 32.0,
+        "regulatory_penalties": 5000,
+        "insurance_premium_increase": 6.4,
+        "productivity_losses": 900.0,
+        "customer_confidence_impact": 16.0
+      },
+      "spot_price_impact": {
+        "total_market_impact": 0.21602009791438903,
+        "price_increase": 0.0013956884992389349,
+        "additional_generation_cost": 2.0097914389040662e-05
+      },
+      "sector_impacts": {
+        "RESIDENTIAL": 228.23889132837962,
+        "COMMERCIAL": 926.4583369925695,
+        "INDUSTRIAL": 4579.917782656759,
+        "GRID_OPERATOR": 2258.097228320949,
+        "ENERGY_RETAILER": 1357.268673985139
+      },
+      "recovery_costs": {
+        "technical_recovery": 5000.0,
+        "security_improvements": 640.0,
+        "staff_training": 10000,
+        "monitoring_upgrades": 25000,
+        "consultant_fees": 20000
+      },
+      "total_economic_impact": 90094.96303588433,
+      "impact_timestamp": "2025-06-19T13:59:39.881195"
+    }
+  },
+  "aggregated_metrics": {
+    "total_potential_impact_aud": 930266.6272187647,
+    "average_impact_per_scenario": 132895.23245982354,
+    "highest_impact_scenario": [
+      "FIRMWARE_INJECTION",
+      {
+        "scenario": "FIRMWARE_INJECTION",
+        "duration_hours": 132.0,
+        "affected_capacity_mw": 0.0072,
+        "direct_costs": {
+          "lost_generation_revenue": 22.8096,
+          "emergency_response_cost": 24000,
+          "equipment_replacement_cost": 10800.0,
+          "forensic_investigation_cost": 15000,
+          "legal_consultation_cost": 8000
+        },
+        "indirect_costs": {
+          "reputation_damage": 72.0,
+          "regulatory_penalties": 50000,
+          "insurance_premium_increase": 14.4,
+          "productivity_losses": 26400.0,
+          "customer_confidence_impact": 36.0
+        },
+        "spot_price_impact": {
+          "total_market_impact": 14.258984540286813,
+          "price_increase": 0.0031402991233291087,
+          "additional_generation_cost": 0.002984540286811985
+        },
+        "sector_impacts": {
+          "RESIDENTIAL": 6813.766827673056,
+          "COMMERCIAL": 28146.250241509584,
+          "INDUSTRIAL": 137274.57365534612,
+          "GRID_OPERATOR": 66534.41706918264,
+          "ENERGY_RETAILER": 40079.732483019165
+        },
+        "recovery_costs": {
+          "technical_recovery": 40000.0,
+          "security_improvements": 1440.0,
+          "staff_training": 10000,
+          "monitoring_upgrades": 25000,
+          "consultant_fees": 20000
+        },
+        "total_economic_impact": 230799.4747093797,
+        "impact_timestamp": "2025-06-19T13:59:39.881178"
+      }
+    ],
+    "lowest_impact_scenario": [
+      "DENIAL_OF_SERVICE",
+      {
+        "scenario": "DENIAL_OF_SERVICE",
+        "duration_hours": 4.5,
+        "affected_capacity_mw": 0.0032,
+        "direct_costs": {
+          "lost_generation_revenue": 0.3456,
+          "emergency_response_cost": 500,
+          "equipment_replacement_cost": 0,
+          "forensic_investigation_cost": 15000,
+          "legal_consultation_cost": 8000
+        },
+        "indirect_costs": {
+          "reputation_damage": 32.0,
+          "regulatory_penalties": 5000,
+          "insurance_premium_increase": 6.4,
+          "productivity_losses": 900.0,
+          "customer_confidence_impact": 16.0
+        },
+        "spot_price_impact": {
+          "total_market_impact": 0.21602009791438903,
+          "price_increase": 0.0013956884992389349,
+          "additional_generation_cost": 2.0097914389040662e-05
+        },
+        "sector_impacts": {
+          "RESIDENTIAL": 228.23889132837962,
+          "COMMERCIAL": 926.4583369925695,
+          "INDUSTRIAL": 4579.917782656759,
+          "GRID_OPERATOR": 2258.097228320949,
+          "ENERGY_RETAILER": 1357.268673985139
+        },
+        "recovery_costs": {
+          "technical_recovery": 5000.0,
+          "security_improvements": 640.0,
+          "staff_training": 10000,
+          "monitoring_upgrades": 25000,
+          "consultant_fees": 20000
+        },
+        "total_economic_impact": 90094.96303588433,
+        "impact_timestamp": "2025-06-19T13:59:39.881195"
+      }
+    ]
+  },
+  "market_analysis": {
+    "spot_price_volatility": {
+      "mean_price": 124.6150445762626,
+      "median_price": 67.65596368477358,
+      "std_deviation": 109.80722041610856,
+      "min_price": 20.59173182689438,
+      "max_price": 581.2811397760229,
+      "volatility_coefficient": 0.8811714571823479,
+      "percentile_95": 361.9842244630468,
+      "percentile_99": 463.9795317485359
+    },
+    "market_characteristics": {
+      "high_renewable_penetration": true,
+      "price_volatility_high": true,
+      "supply_elasticity": "low",
+      "demand_elasticity": "low"
+    }
+  },
+  "risk_weighted_analysis": {
+    "total_expected_annual_loss": 65991.24854884777,
+    "risk_scenarios": {
+      "SINGLE_INVERTER_COMPROMISE": {
+        "annual_likelihood": 0.15,
+        "potential_impact": 93644.03595480564,
+        "expected_annual_loss": 14046.605393220847,
+        "risk_priority": "MEDIUM"
+      },
+      "MULTIPLE_INVERTER_ATTACK": {
+        "annual_likelihood": 0.05,
+        "potential_impact": 116198.5385848324,
+        "expected_annual_loss": 5809.92692924162,
+        "risk_priority": "LOW"
+      },
+      "GATEWAY_COMPROMISE": {
+        "annual_likelihood": 0.08,
+        "potential_impact": 102944.1169407373,
+        "expected_annual_loss": 8235.529355258983,
+        "risk_priority": "LOW"
+      },
+      "API_ENDPOINT_ATTACK": {
+        "annual_likelihood": 0.12,
+        "potential_impact": 90821.40947942549,
+        "expected_annual_loss": 10898.569137531058,
+        "risk_priority": "MEDIUM"
+      },
+      "COORDINATED_GRID_ATTACK": {
+        "annual_likelihood": 0.01,
+        "potential_impact": 205764.08851369983,
+        "expected_annual_loss": 2057.6408851369983,
+        "risk_priority": "LOW"
+      },
+      "FIRMWARE_INJECTION": {
+        "annual_likelihood": 0.03,
+        "potential_impact": 230799.4747093797,
+        "expected_annual_loss": 6923.9842412813905,
+        "risk_priority": "LOW"
+      },
+      "DENIAL_OF_SERVICE": {
+        "annual_likelihood": 0.2,
+        "potential_impact": 90094.96303588433,
+        "expected_annual_loss": 18018.992607176868,
+        "risk_priority": "MEDIUM"
+      }
+    },
+    "top_risk_scenarios": {
+      "DENIAL_OF_SERVICE": {
+        "annual_likelihood": 0.2,
+        "potential_impact": 90094.96303588433,
+        "expected_annual_loss": 18018.992607176868,
+        "risk_priority": "MEDIUM"
+      },
+      "SINGLE_INVERTER_COMPROMISE": {
+        "annual_likelihood": 0.15,
+        "potential_impact": 93644.03595480564,
+        "expected_annual_loss": 14046.605393220847,
+        "risk_priority": "MEDIUM"
+      },
+      "API_ENDPOINT_ATTACK": {
+        "annual_likelihood": 0.12,
+        "potential_impact": 90821.40947942549,
+        "expected_annual_loss": 10898.569137531058,
+        "risk_priority": "MEDIUM"
+      }
+    },
+    "risk_concentration": {
+      "top_3_scenarios_percentage": 65.105855825907
+    }
+  },
+  "mitigation_economics": {
+    "mitigation_measures": {
+      "basic_security_package": {
+        "description": "Basic cybersecurity controls (encryption, authentication)",
+        "implementation_cost": 15000,
+        "annual_maintenance_cost": 3000,
+        "total_cost_5_years": 30000,
+        "annual_risk_reduction": 25000,
+        "risk_reduction_5_years": 125000,
+        "net_benefit_5_years": 95000,
+        "roi_percentage": 316.67,
+        "payback_period_years": 1.2,
+        "cost_effectiveness": 1.67
+      },
+      "advanced_security_package": {
+        "description": "Advanced security (IDS, SIEM, advanced monitoring)",
+        "implementation_cost": 45000,
+        "annual_maintenance_cost": 8000,
+        "total_cost_5_years": 85000,
+        "annual_risk_reduction": 45000,
+        "risk_reduction_5_years": 225000,
+        "net_benefit_5_years": 140000,
+        "roi_percentage": 164.71,
+        "payback_period_years": 1.89,
+        "cost_effectiveness": 1.0
+      },
+      "comprehensive_security_program": {
+        "description": "Full cybersecurity program with 24/7 monitoring",
+        "implementation_cost": 85000,
+        "annual_maintenance_cost": 15000,
+        "total_cost_5_years": 160000,
+        "annual_risk_reduction": 85000,
+        "risk_reduction_5_years": 425000,
+        "net_benefit_5_years": 265000,
+        "roi_percentage": 165.62,
+        "payback_period_years": 1.88,
+        "cost_effectiveness": 1.0
+      },
+      "network_segmentation": {
+        "description": "Network segmentation and microsegmentation",
+        "implementation_cost": 25000,
+        "annual_maintenance_cost": 4000,
+        "total_cost_5_years": 45000,
+        "annual_risk_reduction": 35000,
+        "risk_reduction_5_years": 175000,
+        "net_benefit_5_years": 130000,
+        "roi_percentage": 288.89,
+        "payback_period_years": 1.29,
+        "cost_effectiveness": 1.4
+      }
+    },
+    "recommended_priority": [
+      "basic_security_package",
+      "network_segmentation",
+      "comprehensive_security_program",
+      "advanced_security_package"
+    ],
+    "summary": {
+      "best_roi_measure": "basic_security_package",
+      "total_mitigation_cost_range": {
+        "minimum": 15000,
+        "maximum": 170000
+      }
+    }
+  },
+  "regulatory_context": {
+    "compliance_costs": {
+      "aemo_vpp_compliance": {
+        "implementation_cost": 20000,
+        "annual_cost": 5000,
+        "description": "AEMO VPP API and monitoring compliance"
+      },
+      "cybersecurity_standards": {
+        "implementation_cost": 35000,
+        "annual_cost": 8000,
+        "description": "Cybersecurity standards implementation"
+      },
+      "grid_connection_standards": {
+        "implementation_cost": 15000,
+        "annual_cost": 2000,
+        "description": "AS4777 and grid connection compliance"
+      }
+    },
+    "non_compliance_penalties": {
+      "grid_disconnection_cost": {
+        "immediate_cost": 50000,
+        "ongoing_daily_cost": 2000,
+        "description": "Cost of grid disconnection and reconnection"
+      },
+      "regulatory_fines": {
+        "minor_violations": 5000,
+        "major_violations": 25000,
+        "severe_violations": 100000
+      },
+      "lost_revenue": {
+        "daily_generation_loss": 1200,
+        "description": "Lost revenue during non-compliance period"
+      }
+    },
+    "economic_benefits": {
+      "vpp_participation_revenue": {
+        "annual_revenue": 8000,
+        "description": "Revenue from VPP participation and grid services"
+      },
+      "avoided_penalties": {
+        "annual_value": 15000,
+        "description": "Value of avoiding regulatory penalties"
+      },
+      "insurance_benefits": {
+        "annual_savings": 3000,
+        "description": "Insurance premium reductions for compliance"
+      }
+    }
+  },
+  "recommendations": [
+    {
+      "priority": "CRITICAL",
+      "category": "Risk Management",
+      "recommendation": "Implement comprehensive cybersecurity program immediately",
+      "economic_justification": "Total potential economic impact of $930,267 justifies significant security investment",
+      "estimated_cost": 85000,
+      "estimated_benefit": 790726.63313595,
+      "roi_estimate": "900%+ over 5 years"
+    },
+    {
+      "priority": "HIGH",
+      "category": "Threat-Specific Mitigation",
+      "recommendation": "Prioritize protection against Firmware Injection",
+      "economic_justification": "Highest potential impact scenario: $230,799",
+      "estimated_cost": 25000,
+      "estimated_benefit": 161559.63229656577
+    },
+    {
+      "priority": "HIGH",
+      "category": "Regulatory Compliance",
+      "recommendation": "Ensure full AEMO VPP compliance to avoid penalties",
+      "economic_justification": "Non-compliance penalties can exceed $100,000 plus lost revenue",
+      "estimated_cost": 20000,
+      "estimated_benefit": 100000
+    },
+    {
+      "priority": "MEDIUM",
+      "category": "Risk Transfer",
+      "recommendation": "Evaluate cybersecurity insurance options",
+      "economic_justification": "Insurance can transfer significant portions of economic risk",
+      "estimated_cost": 15000,
+      "estimated_benefit": 558159.9763312588
+    },
+    {
+      "priority": "MEDIUM",
+      "category": "Early Detection",
+      "recommendation": "Implement continuous monitoring and threat detection",
+      "economic_justification": "Early detection can reduce incident duration and costs by 60%",
+      "estimated_cost": 30000,
+      "estimated_benefit": 372106.6508875059
+    }
+  ]
+}

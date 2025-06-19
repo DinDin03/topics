@@ -1,0 +1,32 @@
+
+                <html>
+                <head><title>{{ report_title }}</title></head>
+                <body>
+                    <h1>{{ report_title }}</h1>
+                    <h2>Author: {{ author }}</h2>
+                    <h3>Organization: {{ organization }}</h3>
+                    <p><strong>Classification:</strong> {{ classification }}</p>
+                    {% if executive_summary %}
+                    <h2>Executive Summary</h2>
+                    <p>{{ executive_summary }}</p>
+                    {% endif %}
+                    {% if technical_details %}
+                    <h2>Technical Details</h2>
+                    <p>{{ technical_details }}</p>
+                    {% endif %}
+                    {% if visualizations %}
+                    <h2>Visualizations</h2>
+                    {% for viz_title, viz_image in visualizations.items() %}
+                    <h3>{{ viz_title }}</h3>
+                    <img src="data:image/png;base64,{{ viz_image }}" alt="{{ viz_title }}" />
+                    {% endfor %}
+                    {% endif %}
+                    {% if recommendations %}
+                    <h2>Recommendations</h2>
+                    <ul>
+                        {% for rec in recommendations %}<li>{{ rec }}</li>{% endfor %}
+                    </ul>
+                    {% endif %}
+                </body>
+                </html>
+                

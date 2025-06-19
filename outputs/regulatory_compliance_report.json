@@ -1,0 +1,220 @@
+{
+  "analysis_timestamp": "2025-06-19T13:58:10.473064",
+  "system_info": {
+    "name": "Adelaide Solar Inverter Network",
+    "location": "Adelaide, South Australia",
+    "components_count": 7
+  },
+  "compliance_summary": {
+    "overall_status": "PARTIALLY_COMPLIANT",
+    "frameworks_analyzed": 2,
+    "total_requirements": 6,
+    "compliant_requirements": 2,
+    "non_compliant_requirements": 0,
+    "partially_compliant_requirements": 4,
+    "average_compliance_score": 74.17,
+    "framework_summaries": {
+      "AEMO_VPP": {
+        "requirements_count": 4,
+        "average_score": 86.25,
+        "status_distribution": {
+          "COMPLIANT": 2,
+          "NON_COMPLIANT": 0,
+          "PARTIALLY_COMPLIANT": 2,
+          "NOT_APPLICABLE": 0,
+          "PENDING_REVIEW": 0
+        }
+      },
+      "AS4777": {
+        "requirements_count": 2,
+        "average_score": 50.0,
+        "status_distribution": {
+          "COMPLIANT": 0,
+          "NON_COMPLIANT": 0,
+          "PARTIALLY_COMPLIANT": 2,
+          "NOT_APPLICABLE": 0,
+          "PENDING_REVIEW": 0
+        }
+      }
+    }
+  },
+  "framework_results": {
+    "AEMO_VPP": [
+      {
+        "requirement_id": "AEMO_VPP_001",
+        "status": "COMPLIANT",
+        "compliance_score": 100.0,
+        "assessment_date": "2025-06-19T13:58:10.473017",
+        "evidence": [
+          "API endpoint components found",
+          "AEMO VPP API endpoint identified",
+          "Remote control endpoints available",
+          "Status reporting endpoints available"
+        ],
+        "gaps_identified": [],
+        "recommendations": [],
+        "assessor_notes": "Automated assessment based on system configuration"
+      },
+      {
+        "requirement_id": "AEMO_VPP_002",
+        "status": "COMPLIANT",
+        "compliance_score": 100.0,
+        "assessment_date": "2025-06-19T13:58:10.473029",
+        "evidence": [
+          "Monitoring system components found",
+          "External data transmission capabilities found",
+          "Relevant telemetry data types found: ['power_output', 'voltage_measurements', 'current_measurements', 'status_flags', 'device_status', 'power_output_summary', 'availability_status', 'power_limit_commands', 'voltage_reference_settings', 'power_generation_data']"
+        ],
+        "gaps_identified": [],
+        "recommendations": [],
+        "assessor_notes": ""
+      },
+      {
+        "requirement_id": "AEMO_VPP_003",
+        "status": "PARTIALLY_COMPLIANT",
+        "compliance_score": 75.0,
+        "assessment_date": "2025-06-19T13:58:10.473038",
+        "evidence": [
+          "Encryption implemented on 4 components",
+          "Authentication implemented on 4 components",
+          "Logging/monitoring implemented on 2 components"
+        ],
+        "gaps_identified": [
+          "No firewall protection",
+          "No network segmentation",
+          "No intrusion detection system"
+        ],
+        "recommendations": [
+          "Enable firewall protection",
+          "Implement network segmentation",
+          "Deploy intrusion detection system"
+        ],
+        "assessor_notes": ""
+      },
+      {
+        "requirement_id": "AEMO_VPP_004",
+        "status": "PARTIALLY_COMPLIANT",
+        "compliance_score": 70.0,
+        "assessment_date": "2025-06-19T13:58:10.473046",
+        "evidence": [
+          "Emergency control endpoints available",
+          "Real-time communication capabilities found"
+        ],
+        "gaps_identified": [
+          "No manual override capability found"
+        ],
+        "recommendations": [
+          "Implement manual override mechanisms"
+        ],
+        "assessor_notes": ""
+      }
+    ],
+    "AS4777": [
+      {
+        "requirement_id": "AS4777_001",
+        "status": "PARTIALLY_COMPLIANT",
+        "compliance_score": 50.0,
+        "assessment_date": "2025-06-19T13:58:10.473049",
+        "evidence": [
+          "System configuration reviewed",
+          "Found 2 solar inverter(s)"
+        ],
+        "gaps_identified": [
+          "Technical testing required for full verification"
+        ],
+        "recommendations": [
+          "Conduct AS4777 compliance testing"
+        ],
+        "assessor_notes": ""
+      },
+      {
+        "requirement_id": "AS4777_002",
+        "status": "PARTIALLY_COMPLIANT",
+        "compliance_score": 50.0,
+        "assessment_date": "2025-06-19T13:58:10.473051",
+        "evidence": [
+          "System configuration reviewed",
+          "Found 2 solar inverter(s)"
+        ],
+        "gaps_identified": [
+          "Technical testing required for full verification"
+        ],
+        "recommendations": [
+          "Conduct AS4777 compliance testing"
+        ],
+        "assessor_notes": ""
+      }
+    ]
+  },
+  "recommendations": [
+    {
+      "priority": "HIGH",
+      "category": "Immediate Compliance Actions",
+      "description": "Address critical compliance gaps to avoid penalties",
+      "actions": [
+        "Conduct AS4777 compliance testing",
+        "Conduct AS4777 compliance testing",
+        "Implement manual override mechanisms",
+        "Enable firewall protection",
+        "Implement network segmentation"
+      ]
+    },
+    {
+      "priority": "MEDIUM",
+      "category": "Security Implementation",
+      "description": "Implement cybersecurity controls for regulatory compliance",
+      "actions": [
+        "Implement encryption for all communications",
+        "Deploy multi-factor authentication",
+        "Establish security monitoring and logging",
+        "Conduct regular security assessments"
+      ]
+    },
+    {
+      "priority": "LOW",
+      "category": "Continuous Improvement",
+      "description": "Ongoing compliance monitoring and improvement",
+      "actions": [
+        "Establish compliance monitoring processes",
+        "Regular compliance audits and assessments",
+        "Staff training on regulatory requirements",
+        "Compliance management system implementation"
+      ]
+    }
+  ],
+  "regulatory_context": {
+    "south_australia_specifics": {
+      "mandatory_remote_access": true,
+      "aemo_vpp_participation_required": true,
+      "cybersecurity_standards_recommended": true,
+      "grid_support_functions_mandatory": true
+    },
+    "regulatory_timeline": {
+      "current_phase": "Implementation Period",
+      "key_deadlines": [
+        {
+          "date": "2024-12-31",
+          "requirement": "AEMO VPP compliance mandatory",
+          "status": "Pending"
+        },
+        {
+          "date": "2025-06-30",
+          "requirement": "Cybersecurity standards recommended implementation",
+          "status": "Future"
+        }
+      ]
+    },
+    "compliance_risks": [
+      {
+        "risk": "Grid disconnection",
+        "trigger": "Non-compliance with AEMO VPP requirements",
+        "impact": "Loss of revenue, regulatory penalties"
+      },
+      {
+        "risk": "Cybersecurity incident",
+        "trigger": "Inadequate security controls",
+        "impact": "Grid instability, financial penalties, reputation damage"
+      }
+    ]
+  }
+}
