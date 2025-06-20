@@ -34,7 +34,7 @@ The platform follows modern backend design patterns:
 ### 1. Clone the Repository
 
 ```bash
-git clone <https://github.com/DinDin03/topics.git>
+git clone https://github.com/DinDin03/topics.git
 cd topics
 ```
 
@@ -314,7 +314,7 @@ This platform implements the methodology described in "Security of Solar Inverte
 
 ## Contributing
 
-This is a research project. For academic collaboration or questions about the methodology, please contact:
+This is a research project conducted by;
 
 - **Student**: Dineth Katanwala
 - **Supervisor**: Dr. Marian Mihailescu
