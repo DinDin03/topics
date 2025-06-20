@@ -34,8 +34,8 @@ The platform follows modern backend design patterns:
 ### 1. Clone the Repository
 
 ```bash
-git clone <repository-url>
-cd solar-inverter-cybersecurity
+git clone <https://github.com/DinDin03/topics.git>
+cd topics
 ```
 
 ### 2. Set Up Python Environment
@@ -318,13 +318,3 @@ This is a research project. For academic collaboration or questions about the me
 
 - **Student**: Dineth Katanwala
 - **Supervisor**: Dr. Marian Mihailescu
-
-## License
-
-This project is developed for academic research purposes. Please refer to institutional guidelines for usage and distribution.
-
-## Acknowledgments
-
-- Australian Energy Market Operator (AEMO) for VPP demonstration data
-- National Renewable Energy Laboratory (NREL) for PVWatts API access
-- Cybersecurity researchers who identified the vulnerabilities analyzed in this study
