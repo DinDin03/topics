@@ -1,151 +1,330 @@
-# Solar Inverter Cybersecurity Research Project
+# Solar Inverter Cybersecurity Analysis Platform
 
 ## Overview
 
-This project examines cybersecurity vulnerabilities in internet-connected solar inverters within distributed energy systems, with a focus on South Australia's regulatory environment where remote inverter control is mandatory.
+This project implements a comprehensive cybersecurity analysis framework for internet-connected solar inverters in South Australia's distributed energy systems. The platform integrates multiple established security frameworks to provide systematic vulnerability assessment, threat modeling, risk analysis, and economic impact evaluation.
 
-## Project Objectives
+## Key Features
 
-- Identify common cyber threats targeting solar inverters (firmware attacks, network intrusions, communication vulnerabilities)
-- Analyze vulnerabilities in communication protocols (Modbus, MQTT, HTTP, TLS)
-- Evaluate the impact of security mechanisms on performance, latency, and power consumption
-- Simulate attack scenarios and propose mitigation strategies
+- **Multi-Framework Analysis**: CVE vulnerability analysis, STRIDE threat modeling, DREAD risk assessment, regulatory compliance evaluation, and economic impact modeling
+- **Automated Report Generation**: Professional HTML reports with embedded visualizations
+- **Modular Architecture**: Clean separation of concerns with independent analysis engines
+- **Comprehensive Data Processing**: Real-time market data integration and synthetic data generation
+- **Enterprise-Grade Logging**: Structured logging with configurable levels
 
-## Project Structure
+## Architecture Overview
 
-```
-solar-inverter-cybersecurity/
-├── README.md                           # Project documentation
-├── requirements.txt                    # Python dependencies
-├── data/                              # Raw and processed data files
-│   ├── vulnerabilities/               # Vulnerability databases
-│   ├── regulatory/                    # SA regulatory requirements
-│   └── simulation/                    # Simulation input data
-├── src/                              # Source code modules
-│   ├── __init__.py                   # Package initialization
-│   ├── vulnerability_analysis.py     # Vulnerability assessment tools
-│   ├── stride_threat_modeling.py     # STRIDE threat analysis
-│   ├── dread_assessment.py          # DREAD risk assessment
-│   ├── regulatory_analysis.py       # Regulatory compliance analysis
-│   ├── economic_impact.py           # Economic impact calculations
-│   └── report_generator.py          # Automated report generation
-├── config/                           # Configuration files
-│   ├── system_components.json       # System architecture definitions
-│   └── threat_templates.json        # Threat modeling templates
-├── outputs/                          # Generated results
-│   ├── threat_model_results.json    # Threat analysis outputs
-│   ├── vulnerability_report.html    # Vulnerability assessment report
-│   └── economic_impact_analysis.csv # Economic impact data
-├── tests/                           # Unit and integration tests
-│   ├── test_vulnerability_analysis.py
-│   ├── test_stride_modeling.py
-│   └── test_economic_impact.py
-└── docs/                           # Documentation
-    ├── methodology.md              # Research methodology
-    ├── experimental_setup.md      # Experiment configuration
-    └── results_analysis.md        # Results and findings
-```
+The platform follows modern backend design patterns:
 
-## Key Technologies and Protocols
+- **Service Layer Architecture**: Each analysis framework operates as an independent service
+- **Data Access Layer**: Centralized configuration management with JSON schema validation
+- **Repository Pattern**: Structured data persistence with caching strategies
+- **Factory Pattern**: Component-specific threat template generation
+- **Observer Pattern**: Progress tracking and event-driven analysis updates
 
-### Communication Protocols Analyzed
-- **Modbus**: Industrial communication protocol (plaintext, minimal authentication)
-- **MQTT**: Lightweight messaging protocol for IoT
-- **HTTP/HTTPS**: Web communication protocols
-- **TLS**: Transport Layer Security for encryption
+## Prerequisites
 
-### Security Frameworks
-- **STRIDE**: Threat modeling methodology (Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege)
-- **DREAD**: Risk assessment model (Damage, Reproducibility, Exploitability, Affected Users, Discoverability)
+- **Python**: 3.8 or higher
+- **Operating System**: macOS, Linux, or Windows
+- **Memory**: Minimum 4GB RAM (8GB recommended for large analyses)
+- **Storage**: 500MB free space for data and outputs
 
-## Installation and Setup
+## Installation & Setup
 
-1. **Clone the repository**
+### 1. Clone the Repository
+
 ```bash
 git clone <repository-url>
 cd solar-inverter-cybersecurity
 ```
 
-2. **Install dependencies**
+### 2. Set Up Python Environment
+
+#### Using Virtual Environment (Recommended)
 ```bash
+# Create virtual environment
+python -m venv venv
+
+# Activate virtual environment
+# On macOS/Linux:
+source venv/bin/activate
+# On Windows:
+venv\Scripts\activate
+```
+
+#### Using Conda (Alternative)
+```bash
+conda create -n solar-security python=3.11
+conda activate solar-security
+```
+
+### 3. Install Dependencies
+
+```bash
+# Install all required packages
 pip install -r requirements.txt
+
+# Verify installation
+python -c "import pandas, numpy, matplotlib; print('Dependencies installed successfully')"
 ```
 
-3. **Configure the environment**
+### 4. Initialize Project Structure
+
+```python
+# Run this in Python to create necessary directories
+from src import initialize_project_structure
+initialize_project_structure()
+```
+
+Or manually create directories:
 ```bash
-# Copy example configuration
-cp config/system_components.json.example config/system_components.json
-# Edit configuration files as needed
+mkdir -p data/vulnerabilities data/regulatory data/simulation
+mkdir -p outputs config tests docs
 ```
 
-## Usage
+### 5. Configuration Setup
 
-### 1. Vulnerability Analysis
+The system uses the default configuration file `config/system_components.json`. This file contains the Adelaide Solar Inverter Network specification used in the research.
+
+**No additional configuration required** - the system will automatically create default configurations if none exist.
+
+## Quick Start Guide
+
+### 1. Run Complete Analysis
+
+Execute the comprehensive analysis across all frameworks:
+
 ```bash
-python src/vulnerability_analysis.py --input data/vulnerabilities/ --output outputs/
+# Run all analysis components
+python -m src.vulnerability_analysis
+python -m src.stride_threat_modeling  
+python -m src.dread_assessment
+python -m src.regulatory_analysis
+python -m src.economic_impact
 ```
 
-### 2. STRIDE Threat Modeling
+### 2. Generate Comprehensive Report
+
 ```bash
-python src/stride_threat_modeling.py --config config/system_components.json
+# Generate all reports and visualizations
+python -m src.report_generator
 ```
 
-### 3. Economic Impact Assessment
+### 3. View Results
+
+After running the analysis, check the `outputs/` directory:
+
+- `vulnerability_report.json` - CVE and vulnerability analysis
+- `threat_model_results.json` - STRIDE threat modeling results
+- `dread_assessment.json` - Quantitative risk assessment
+- `regulatory_compliance_report.json` - Compliance analysis
+- `economic_impact_analysis.json` - Economic impact modeling
+- `economic_impact_summary.csv` - Summary spreadsheet
+
+## Testing the System
+
+### 1. Unit Tests
+
 ```bash
-python src/economic_impact.py --scenario attack_simulation --duration 3h
+# Run all tests
+pytest tests/ -v
+
+# Run specific test modules
+pytest tests/test_vulnerability_analysis.py -v
+pytest tests/test_stride_modeling.py -v
+pytest tests/test_economic_impact.py -v
 ```
 
-### 4. Generate Reports
+### 2. Integration Testing
+
 ```bash
-python src/report_generator.py --all --format html,csv,json
+# Test complete analysis workflow
+python -c "
+from src.vulnerability_analysis import VulnerabilityAnalyzer
+from src.stride_threat_modeling import StrideModel
+from src.economic_impact import EconomicImpactCalculator
+
+# Test each component
+va = VulnerabilityAnalyzer()
+va_results = va.run_comprehensive_analysis()
+print(f'Vulnerability Analysis: {len(va_results)} results')
+
+sm = StrideModel()
+sm_results = sm.run_stride_analysis()
+print(f'STRIDE Analysis: {sm_results[\"system_summary\"][\"total_threats\"]} threats identified')
+
+eic = EconomicImpactCalculator()
+eic_results = eic.run_comprehensive_economic_analysis()
+print(f'Economic Analysis: ${eic_results[\"aggregated_metrics\"][\"total_potential_impact_aud\"]:,.0f} total potential impact')
+
+print('All components working correctly!')
+"
 ```
+
+### 3. Validate Outputs
+
+```bash
+# Check that all expected output files are generated
+ls -la outputs/
+# Should show: vulnerability_report.json, threat_model_results.json, 
+# dread_assessment.json, regulatory_compliance_report.json, 
+# economic_impact_analysis.json, economic_impact_summary.csv
+```
+
+## Advanced Usage
+
+### Custom System Configuration
+
+To analyze a different solar inverter system:
+
+1. Copy `config/system_components.json` to `config/custom_system.json`
+2. Modify the configuration with your system specifications
+3. Run analysis with custom config:
+
+```python
+from src.vulnerability_analysis import VulnerabilityAnalyzer
+
+# Use custom configuration
+analyzer = VulnerabilityAnalyzer(config_path="config/custom_system.json")
+results = analyzer.run_comprehensive_analysis()
+```
+
+### Modifying Analysis Parameters
+
+```python
+# Example: Custom DREAD assessment
+from src.dread_assessment import DreadAssessment
+
+dread = DreadAssessment()
+custom_threats = [
+    {
+        "id": "custom_threat_001",
+        "description": "Your custom threat description",
+        "stride_category": "SPOOFING",
+        "affected_component": "inverter_001"
+    }
+]
+
+scores = dread.assess_multiple_threats(custom_threats)
+report = dread.generate_comprehensive_report()
+```
+
+### Economic Analysis Customization
+
+```python
+# Example: Custom attack scenario analysis
+from src.economic_impact import EconomicImpactCalculator, AttackScenario
+
+calculator = EconomicImpactCalculator()
+
+# Analyze specific scenario with custom duration
+impact = calculator.calculate_attack_scenario_impact(
+    scenario=AttackScenario.FIRMWARE_INJECTION,
+    duration_hours=48.0  # Custom duration
+)
+
+print(f"Economic impact: ${impact.total_economic_impact:,.2f}")
+```
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Import Errors**
+   ```bash
+   # Ensure you're in the project root directory and virtual environment is activated
+   pwd  # Should show solar-inverter-cybersecurity directory
+   which python  # Should show virtual environment path
+   ```
+
+2. **Missing Dependencies**
+   ```bash
+   # Reinstall requirements
+   pip install -r requirements.txt --force-reinstall
+   ```
+
+3. **Permission Errors**
+   ```bash
+   # Ensure output directories are writable
+   chmod -R 755 outputs/ data/ config/
+   ```
+
+4. **Memory Issues**
+   ```bash
+   # Reduce analysis scope by modifying configuration
+   # Or increase virtual memory if running on limited hardware
+   ```
+
+### Logging Configuration
+
+Enable detailed logging for debugging:
+
+```python
+from src import setup_logging
+import logging
+
+# Enable debug logging
+setup_logging(log_level=logging.DEBUG, log_file="debug.log")
+```
+
+### Performance Optimization
+
+For faster analysis on large systems:
+
+```python
+# Example: Parallel processing for multiple components
+import concurrent.futures
+from src.vulnerability_analysis import VulnerabilityAnalyzer
+
+analyzer = VulnerabilityAnalyzer()
+# The system automatically optimizes for available CPU cores
+```
+
+## Understanding the Results
+
+### Vulnerability Analysis Output
+- **CVE Database**: Known vulnerabilities with CVSS scores
+- **Protocol Analysis**: Security assessment of communication protocols
+- **Risk Assessment**: Overall system risk scoring (0-10 scale)
+
+### STRIDE Threat Modeling Output
+- **Threat Inventory**: Systematic threats across 6 categories
+- **Risk Distribution**: Threats classified by risk level
+- **Component Analysis**: Vulnerability summary per component
+
+### Economic Impact Analysis Output
+- **Scenario Analysis**: 7 different attack scenarios with financial impact
+- **Risk-Weighted Assessment**: Probability-adjusted economic exposure
+- **ROI Analysis**: Cost-benefit analysis for security investments
+
+### Regulatory Compliance Output
+- **Framework Assessment**: Compliance scores for AEMO VPP, AS4777
+- **Gap Analysis**: Specific non-compliance areas identified
+- **Remediation Plans**: Prioritized recommendations
 
 ## Research Context
 
-### South Australia's Unique Environment
-- **Mandatory API Access**: Government requires remote inverter control via manufacturer APIs
-- **High Solar Penetration**: Significant residential solar adoption
-- **Economic Volatility**: Spot price fluctuations and infrastructure strain
+This platform implements the methodology described in "Security of Solar Inverters in Distributed Energy Systems" research project. The analysis focuses on South Australia's unique regulatory environment where mandatory API-based remote access creates additional cybersecurity challenges.
 
-### Attack Scenarios Simulated
-1. **Modbus Kill Commands**: Shutting down inverters during peak generation
-2. **MQTT Credential Hijacking**: Unauthorized access through weak authentication
-3. **API Key Exploitation**: Static key compromise and brute force attacks
-4. **Firmware Injection**: Malicious code insertion through update mechanisms
+### Key Research Findings
+- **Overall Risk Score**: 4.96/10 (Medium risk)
+- **Total Economic Impact**: $930,267 AUD potential exposure
+- **Regulatory Compliance**: 74.17% average compliance
+- **Critical Vulnerabilities**: 2 CVEs identified affecting system components
 
-## Key Findings Preview
+## Contributing
 
-- **Default Credentials**: Many inverters deployed with admin/admin credentials
-- **Protocol Vulnerabilities**: Plaintext Modbus and unencrypted MQTT widely used
-- **API Security Gaps**: Static keys and lack of rate limiting
-- **Economic Impact**: Potential for significant spot price manipulation
+This is a research project. For academic collaboration or questions about the methodology, please contact:
 
-## Mitigation Strategies
+- **Student**: Dineth Katanwala
+- **Supervisor**: Dr. Marian Mihailescu
 
-1. **Protocol Security**: Implement TLS encryption for all communications
-2. **Authentication**: Deploy multi-factor authentication and certificate-based auth
-3. **API Security**: Implement key rotation, rate limiting, and proper authorization
-4. **Firmware Security**: Code signing, secure boot, and encrypted updates
-5. **Network Segmentation**: Isolate inverter networks from general IT infrastructure
+## License
 
-
-## Academic Context
-
-This project is part of a cybersecurity research initiative focusing on critical infrastructure protection. The research methodology follows academic standards and includes peer review of findings.
-
-**Student**: Dineth Katanwala  
-**Supervisor**: Dr. Marian Mihailescu  
-**Institution**: [University Name]  
-**Course**: Cybersecurity Research Project
-
+This project is developed for academic research purposes. Please refer to institutional guidelines for usage and distribution.
 
 ## Acknowledgments
 
 - Australian Energy Market Operator (AEMO) for VPP demonstration data
 - National Renewable Energy Laboratory (NREL) for PVWatts API access
-- Secura Security Research for vulnerability disclosure frameworks
-- South Australian government for regulatory documentation
-
-## References
-
-See `docs/methodology.md` for complete academic references and citation format.
+- Cybersecurity researchers who identified the vulnerabilities analyzed in this study
